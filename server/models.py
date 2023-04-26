@@ -4,7 +4,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
 
 
-class User( Model.db, SerializerMixin ):
+class User( db.Model, SerializerMixin ):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
@@ -13,7 +13,7 @@ class User( Model.db, SerializerMixin ):
     
     @hybrid_property
     def password_hash( self ):
-        return self.password_hash
+        return self._password_hash
     
     @password_hash.setter
     def password_hash( self, password ):

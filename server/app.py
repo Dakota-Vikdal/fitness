@@ -1,8 +1,18 @@
-from config import app
+from flask import request, make_response, session
+from flask_restful import Resource, Api
+from sqlalchemy.exc import IntegrityError
+#where should i import api from? I just removed it from config
+from config import app, db, bcrypt
+from models import User
 
-@app.route( '/' )
-def root_route():
-    return 'hey bud we\'re gonna acommplish great things'
+api = Api(app)
+
+
+class Users( Resource ):
+    def get(self):
+        return 'hey'
+
+api.add_resource(Users, '/users')
 
 
 if __name__ == '__main__':

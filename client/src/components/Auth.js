@@ -41,6 +41,17 @@ export function Login() {
     return(
         <div>
             <h1>Login</h1>
+            <form >
+                <div>
+                    username: <input  name='username' />
+                </div>
+                <div>
+                    password: <input  name='password' />
+                </div>
+                <div>
+                    <input type='submit' />
+                </div>
+            </form>
         </div>
     )
 }
