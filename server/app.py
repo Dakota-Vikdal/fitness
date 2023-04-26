@@ -7,12 +7,18 @@ from models import User
 
 api = Api(app)
 
+#taking this from the lesson Authenticating Users
+class Logins(Resource):
 
-class Users( Resource ):
-    def get(self):
-        return 'hey'
+    def post(self):
+        user = User.query.filter(
+            User.username == request.get_json()['username']
+        ).first()
 
-api.add_resource(Users, '/users')
+        session['user_id'] = user.id
+        return user.to_dict()
+
+api.add_resource(Logins, '/users')
 
 
 if __name__ == '__main__':
