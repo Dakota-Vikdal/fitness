@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import NavButton from './NavButton'
 import {useHistory} from 'react-router-dom'
 import {useFormik} from 'formik'
 import * as yup from "yup"
 
-export function Signup({setUser}) {
+export function Signup( { updateUser } ) {
 
     const history = useHistory()
 
@@ -22,19 +21,20 @@ export function Signup({setUser}) {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("/signup", {
+            fetch("http://127.0.0.1:5555/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(values),
-            }).then((r) => {
-                if (r.ok) {
-                    r.json().then((user) => setUser(user));
-                }
-            });
-            history.push('/login')
-        },
+            })
+            .then(res => res.json())
+            .then(user => {
+                updateUser(user)
+                history.push('/')
+            })
+        }
+
     })
 
 
@@ -79,54 +79,17 @@ export function Signup({setUser}) {
     )
 
 }
-   
 
-
-
-
-
-
-
-
-
-
-
-
-
-//     return (
-//         <div>
-//             <h1>Welcome!</h1>
-//             <h3>Sign up below</h3>
-//             <form onSubmit={createAccount}>
-//                 <div>
-//                     username: <input onChange= {updateForm} name='username' />
-//                 </div>
-//                 <div>
-//                     password: <input onChange= {updateForm} name='password' />
-//                 </div>
-//                 <div>
-//                     confirm: <input onChange= {updateForm} name='confirm' />
-//                 </div>
-//                 <div>
-//                     <input type='submit' />
-//                 </div>
-//             </form>
-//             <NavButton/>
-//         </div>
-//     )
-// }
-
-export function Login({handleLogin}) {
+export function Login( {handleLogin} ) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
       
-
     const history = useHistory()
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/login", {
+        fetch("http://127.0.0.1:5555/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -137,9 +100,9 @@ export function Login({handleLogin}) {
             if (r.ok) {
                 r.json().then((user) => handleLogin(user))
                 history.push('/')
-            }
-            else {
-                return 'uh oh'
+                console.log('is this working?')
+            } else {
+                return {'msg': 'incorrect login'}
             }
         });
     }
@@ -151,6 +114,7 @@ export function Login({handleLogin}) {
             <h3>Ready to get fit? If so, login below.</h3>
             <form onSubmit={handleSubmit}>
                 <div>
+                    <label>Username</label>
                     <input
                         type="text"
                         name="username"
@@ -159,6 +123,7 @@ export function Login({handleLogin}) {
                         onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div>
+                    <label>password</label>
                     <input
                         type="password"
                         name="password"
@@ -171,10 +136,50 @@ export function Login({handleLogin}) {
                     <input type='submit' />
                 </div>
             </form>
-            <NavButton />
         </div>
     )
 }
+
+
+export function Logout({onLogout}) {
+                                     
+    function handleLogout() {
+        fetch("/logout", {
+        method: "DELETE",
+        }).then(() => onLogout());
+    }
+    
+    return (
+            <header>
+                <button onClick={handleLogout}>Logout</button>
+            </header>
+    );
+}
+
+    // history = useHistory()
+
+    // const hanLogout = () => {
+    //     fetch('http://127.0.0.1:5555/logout', {
+    //     method: 'DELETE'
+    //     })
+    //     .then(res => {
+    //     if(res.ok){
+    //         handleLogout(null)
+    //         history.push('/')
+    //     }
+        
+    //     })
+    // }
+    // return(
+    //     <div>
+    //         <form onSubmit={handleSubmit}>
+    //             < onClick={hanLogout}>Logout</>
+    //         </form>
+    //         <NavButton />
+    //     </div>
+    // )
+    
+
 
 
 

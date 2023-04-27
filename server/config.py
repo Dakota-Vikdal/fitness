@@ -17,6 +17,8 @@ app.permanent_session_lifetime = timedelta(days=30)
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
+db = SQLAlchemy(metadata=metadata)
+app.secret_key = b'\xa8\x96G\xf2\xfbM{\x8e\xfdt\x92I\xef\xf3\xd7\x98'
 
 db = SQLAlchemy()
 

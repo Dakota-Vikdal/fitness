@@ -7,10 +7,13 @@ from config import db, bcrypt
 class User( db.Model, SerializerMixin ):
     __tablename__ = 'users'
 
+    serialize_rules=('')
+
     id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String, nullable= False, default='')
     username = db.Column(db.String)
     _password_hash = db.Column(db.String, nullable = False)
-    email = db.Column(db.String, nullable=False)
+    
     
     @hybrid_property
     def password_hash( self ):
@@ -32,5 +35,17 @@ class User( db.Model, SerializerMixin ):
         return f'USER: ID: {self.id}, Username: {self.username}, Email: {self.email}'
     
 
+class Workout(db.Model, SerializerMixin):
+    __tablename__='workouts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+
+
+class ExerciseList(db.Model, SerializerMixin):
+    __tablename__='exerciselists'
+
+    id = db.Column(db.Integer, primary_key=True)
+    
 
     # created_at = db.Column(db.DateTime, server_default = db.func.now())

@@ -44,6 +44,16 @@ function NavBar() {
             >
                 login
             </NavLink>
+            <NavLink
+                to="/logout"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                background: "maroon",
+                }}
+            >
+                logout
+            </NavLink>
             </div>
   );
 }

@@ -1,6 +1,6 @@
 import './stylesheets/App.css';
 import { Switch, Route } from 'react-router-dom'
-import { Signup, Login} from './components/Auth.js'
+import { Signup, Login, Logout} from './components/Auth.js'
 import Home from './components/Home'
 import NavBar from './components/NavBar'
 import {useEffect, useState} from 'react'
@@ -20,14 +20,11 @@ function App() {
       setUser(user);
   }
 
-  function handleLogout() {
+  function onLogout() {
       setUser(null);
   }
 
-  function handleUpdate(user) {
-      setUser(user)
-  }
-
+  const updateUser = (user) => setUser(user)
 
 
   return (
@@ -39,7 +36,10 @@ function App() {
               <Login handleLogin = {handleLogin}/>
             </Route>
             <Route path= '/signup' >
-              <Signup />
+              <Signup updateUser = {updateUser}/>
+            </Route>
+            <Route path= '/logout' >
+              <Logout onLogout = {onLogout}/>
             </Route>
             <Route path ='/'>
               <Home />
