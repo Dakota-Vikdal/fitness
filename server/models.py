@@ -10,6 +10,7 @@ class User( db.Model, SerializerMixin ):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String)
     _password_hash = db.Column(db.String, nullable = False)
+    email = db.Column(db.String, nullable=False)
     
     @hybrid_property
     def password_hash( self ):
@@ -27,3 +28,9 @@ class User( db.Model, SerializerMixin ):
             self._password_hash, password.encode( 'utf-8' )
         )
     
+    def __repr__(self):
+        return f'USER: ID: {self.id}, Username: {self.username}, Email: {self.email}'
+    
+
+
+    # created_at = db.Column(db.DateTime, server_default = db.func.now())
