@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from sqlalchemy.exc import IntegrityError
 #where should i import api from? I just removed it from config
 from config import app, db, bcrypt
-from models import User
+from models import User, Workout, ExerciseList, Exercise
 
 api = Api(app)
 
@@ -124,7 +124,7 @@ class Logout(Resource):
 
     def delete(self):
         session['user_id'] = None
-        response = make_response('', 204)
+        response = make_response({'msg':'been deleted yo'}, 200)
         return response
 api.add_resource(Logout, '/logout', endpoint='logout')
 
@@ -157,6 +157,36 @@ class ClearSession(Resource):
 
         return {}, 204
 api.add_resource(ClearSession, '/clear', endpoint='clear')
+
+
+
+
+
+
+
+
+
+
+class Workouts( Resource ):
+    def get(self):
+        w_list = []
+        for w in Workout.query.all():
+            w_dict = {
+                'id': w.id,
+                'name': w.name
+            }
+            w_list.append(w_dict)
+        return make_response(w_list, 200)
+    
+    def post(self):
+        data = request.get_json()
+        workout = Workout(workout_name = data['workout_name'],
+                          user_id = data['user_id'])
+        db.session.add(workout)
+        db.session.commit()
+        return make_response(workout.to_dict(), 201)
+
+api.add_resource(Workouts, '/workouts')
 
 
 

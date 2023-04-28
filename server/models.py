@@ -1,5 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from config import db, bcrypt
 
@@ -7,12 +8,14 @@ from config import db, bcrypt
 class User( db.Model, SerializerMixin ):
     __tablename__ = 'users'
 
-    serialize_rules=('')
+    serialize_rules=('-workouts',)
 
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String, nullable= False, default='')
     username = db.Column(db.String)
     _password_hash = db.Column(db.String, nullable = False)
+
+    workouts = db.relationship('Workout', backref='user')
     
     
     @hybrid_property
@@ -35,17 +38,45 @@ class User( db.Model, SerializerMixin ):
         return f'USER: ID: {self.id}, Username: {self.username}, Email: {self.email}'
     
 
+
+
+
+
+
+
+
+
+
 class Workout(db.Model, SerializerMixin):
     __tablename__='workouts'
 
+    serialize_rules=('exerciselists', 'user_id')
+
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    workout_name = db.Column(db.String, nullable=False)
+
+    exerciselists = db.relationship('ExerciseList', backref='workout')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+
+
+class Exercise(db.Model, SerializerMixin):
+    __tablename__='exercises'
+
+    
+
+    id = db.Column(db.Integer, primary_key=True)
+    exercise_name = db.Column(db.String, nullable=False)
+
+    exerciselists = db.relationship('ExerciseList', backref='exercise')
+    workouts = association_proxy('exerciselists', 'workouts')
+
 
 
 class ExerciseList(db.Model, SerializerMixin):
     __tablename__='exerciselists'
 
     id = db.Column(db.Integer, primary_key=True)
-    
-
+    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
+    exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'), nullable=False)
     # created_at = db.Column(db.DateTime, server_default = db.func.now())
