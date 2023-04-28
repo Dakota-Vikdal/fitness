@@ -11,8 +11,8 @@ class User( db.Model, SerializerMixin ):
     serialize_rules=('-workouts',)
 
     id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String, nullable= False, default='')
     username = db.Column(db.String)
+    email = db.Column(db.String, nullable= False, default='')
     _password_hash = db.Column(db.String, nullable = False)
 
     workouts = db.relationship('Workout', backref='user')
@@ -54,6 +54,7 @@ class Workout(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     workout_name = db.Column(db.String, nullable=False)
+    #maybe add workout_length here? Determine a general amount of time one will spend in a workout.
 
     exerciselists = db.relationship('ExerciseList', backref='workout')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -63,10 +64,13 @@ class Workout(db.Model, SerializerMixin):
 class Exercise(db.Model, SerializerMixin):
     __tablename__='exercises'
 
-    
+
 
     id = db.Column(db.Integer, primary_key=True)
     exercise_name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String)
+    muscles_hit = db.Column(db.String, nullable=False)
+
 
     exerciselists = db.relationship('ExerciseList', backref='exercise')
     workouts = association_proxy('exerciselists', 'workouts')

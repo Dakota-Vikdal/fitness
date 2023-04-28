@@ -173,7 +173,7 @@ class Workouts( Resource ):
         for w in Workout.query.all():
             w_dict = {
                 'id': w.id,
-                'name': w.name
+                'workout_name': w.workout_name
             }
             w_list.append(w_dict)
         return make_response(w_list, 200)
