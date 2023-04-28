@@ -83,19 +83,32 @@ class SignUp(Resource):
         #     "username": new_user.username
         # })
     
-api.add_resource(SignUp, '/signup')
+api.add_resource(SignUp, '/signup', endpoint='signup')
 
 
 class Login(Resource):
 
     def post(self):
-        
-        user = User.query.filter(
-            User.username == request.get_json()['username']
-        ).first()
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
 
-        session['user_id'] = user.id
-        return user.to_dict()
+        user = User.query.filter(User.username == username).first()
+
+        if user:
+            if user.authenticate(password):
+                session['user_id'] = user.id
+                return make_response(user.to_dict(), 200)
+            
+        response = make_response({'msg':'Not Authorized'}, 401)
+        return response
+    
+        # user = User.query.filter(
+        #     User.username == request.get_json()['username']
+        # ).first()
+
+        # session['user_id'] = user.id
+        # return user.to_dict()
 
         # username = request.get_json().get('username')
         # password = request.get_json().get('password')

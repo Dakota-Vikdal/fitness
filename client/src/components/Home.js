@@ -1,20 +1,12 @@
-//import { Signup, Login } from './Auth.js'
-import {useState, useEffect} from 'react'
 
-function Home() {
+function Home({user}) {
 
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        fetch("/check_session").then((response) => {
-          if (response.ok) {
-            response.json().then((user) => setUser(user));
-          }
-        });
-      }, []);
-      console.log(user)
     if (user) {
-        return <h2>Welcome, {user.username}!</h2>;
+        return (
+        <div>
+          <h1>Figure out how to organize this homepage</h1>
+          <h2>Welcome, {user.username}!</h2>
+        </div>)
         } else {
         return <h2>Welcome!</h2>
         }

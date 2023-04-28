@@ -146,7 +146,7 @@ export function Logout({onLogout}) {
     function handleLogout() {
         fetch("http://127.0.0.1:5555/logout", {
         method: "DELETE",
-        }).then(() => onLogout());
+        }).then(() => onLogout())
     }
     
     return (

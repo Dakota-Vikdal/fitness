@@ -15,6 +15,7 @@ function App() {
           }
       });
   }, []);
+  console.log(user)
 
   function handleLogin(user) {
       setUser(user);
@@ -42,7 +43,7 @@ function App() {
               <Logout onLogout = {onLogout}/>
             </Route>
             <Route path ='/'>
-              <Home />
+              <Home user = {user}/>
             </Route>
         </Switch>
       </header> 
