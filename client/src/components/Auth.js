@@ -8,10 +8,20 @@ export function Signup( { updateUser } ) {
     const history = useHistory()
 
     const formSchema = yup.object().shape({
-        username: yup.string().required('Please enter a username'),
-        email: yup.string().email(),
-        password: yup.string().required('Please enter a username')
+        username: yup
+        .string()
+        .required('Please enter username'),
+        email: yup
+        .string()
+        .email('Please enter email'),
+        password: yup
+        .string()
+        .required('Please enter a password')
+        .min(6, 'Password must be 6 characters long')
+        .matches(/[0-9]/, 'Password requires a number')
+        .matches(/[^\w]/, 'Password requires a symbol'),
     })
+
 
     const formik = useFormik({
         initialValues:{
@@ -51,7 +61,6 @@ export function Signup( { updateUser } ) {
                     value={formik.values.username}
                     onChange={formik.handleChange}
                     />
-                    <p style={{ color: "red" }}> {formik.errors.email}</p>
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
@@ -62,6 +71,7 @@ export function Signup( { updateUser } ) {
                         onChange={formik.handleChange}
                         autoComplete="current-password" 
                         />
+                    <p style={{ color: "fuchsia" }}> {formik.errors.password}</p>
                 </div>
                 <div>
                     <label htmlFor="email">Email Address</label>
@@ -73,6 +83,7 @@ export function Signup( { updateUser } ) {
                     onChange={formik.handleChange}
                     />
                 </div>
+                <p style={{ color: "fuchsia" }}> {formik.errors.email}</p>
                 <button type="submit">Submit</button>
             </form>
         </div>

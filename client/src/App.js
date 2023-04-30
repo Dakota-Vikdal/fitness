@@ -4,6 +4,8 @@ import { Signup, Login, Logout} from './components/Auth.js'
 import Home from './components/Home'
 import NavBar from './components/NavBar'
 import {useEffect, useState} from 'react'
+import ExercisePage from './components/ExercisePage'
+import WorkoutPage from './components/WorkoutPage'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -15,7 +17,6 @@ function App() {
           }
       });
   }, []);
-  console.log(user)
 
   function handleLogin(user) {
       setUser(user);
@@ -30,23 +31,29 @@ function App() {
 
   return (
      <div className="App">
-       <header className="App-header">
+        {/* <header className="App-header"> */}
        <NavBar />
         <Switch>
-            <Route path= '/login'>
-              <Login handleLogin = {handleLogin}/>
-            </Route>
             <Route path= '/signup' >
               <Signup updateUser = {updateUser}/>
             </Route>
+            <Route path= '/login'>
+              <Login handleLogin = {handleLogin}/>
+            </Route>
             <Route path= '/logout' >
               <Logout onLogout = {onLogout}/>
+            </Route>
+            <Route path= '/exercisepage' >
+              <ExercisePage />
+            </Route>
+            <Route path= '/workoutpage' >
+              <WorkoutPage />
             </Route>
             <Route path ='/'>
               <Home user = {user}/>
             </Route>
         </Switch>
-      </header> 
+      {/* // </header>  */}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import validates
 
 from config import db, bcrypt
 
@@ -38,8 +39,17 @@ class User( db.Model, SerializerMixin ):
         return f'USER: ID: {self.id}, Username: {self.username}, Email: {self.email}'
     
 
+    @validates( 'username' )
+    def validate_user(self, key, username):
+        if username in [ u.username for u in User.query.all() ]:
+            raise ValueError("Sorry, username already taken.")
+        return username
 
-
+    @validates('_password_hash')
+    def validates_content(self, key, password):
+        if len(password) <= 6:
+            raise ValueError("Password must be 6 characters or longer.")
+        return password
 
 
 
@@ -50,7 +60,7 @@ class User( db.Model, SerializerMixin ):
 class Workout(db.Model, SerializerMixin):
     __tablename__='workouts'
 
-    serialize_rules=('exerciselists', 'user_id')
+    serialize_rules=('-exercises', '-user_id', '-exerciselists.workout' )
 
     id = db.Column(db.Integer, primary_key=True)
     workout_name = db.Column(db.String, nullable=False)
@@ -58,13 +68,14 @@ class Workout(db.Model, SerializerMixin):
 
     exerciselists = db.relationship('ExerciseList', backref='workout')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    exercises = association_proxy('exerciselists', 'exercise')
 
 
 
 class Exercise(db.Model, SerializerMixin):
     __tablename__='exercises'
 
-
+    serialize_rules=( '-workouts', '-exerciselists' )
 
     id = db.Column(db.Integer, primary_key=True)
     exercise_name = db.Column(db.String, nullable=False)
@@ -73,14 +84,15 @@ class Exercise(db.Model, SerializerMixin):
 
 
     exerciselists = db.relationship('ExerciseList', backref='exercise')
-    workouts = association_proxy('exerciselists', 'workouts')
+    workouts = association_proxy('exerciselists', 'workout')
 
 
 
 class ExerciseList(db.Model, SerializerMixin):
     __tablename__='exerciselists'
 
+    serialize_rules=( '-exercise.exerciselists', '-workout_id', '-exercise_id' )
+
     id = db.Column(db.Integer, primary_key=True)
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'), nullable=False)
-    # created_at = db.Column(db.DateTime, server_default = db.func.now())

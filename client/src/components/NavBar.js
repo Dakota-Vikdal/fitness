@@ -54,6 +54,26 @@ function NavBar() {
             >
                 logout
             </NavLink>
+            <NavLink
+                to="/exercisepage"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                background: "maroon",
+                }}
+            >
+                Exercises
+            </NavLink>
+            <NavLink
+                to="/workoutpage"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                background: "maroon",
+                }}
+            >
+                Workouts
+            </NavLink>
             </div>
   );
 }

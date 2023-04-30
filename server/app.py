@@ -198,8 +198,153 @@ class Workouts( Resource ):
         db.session.add(workout)
         db.session.commit()
         return make_response(workout.to_dict(), 201)
-
+    
 api.add_resource(Workouts, '/workouts')
+
+class WorkoutsById( Resource ):
+    def get(self, id):
+        w_instance = Workout.query.filter_by(id=id).first()
+        if w_instance == None:
+            return make_response({"error": "Workout not found"}, 404)
+        return make_response(w_instance.to_dict(), 200)
+    
+    def patch(self, id):
+        w = Workout.query.filter_by( id = id ).first()
+        if w == None:
+            return make_response({'error': 'Workout Not Found.'}, 404)
+        data = request.get_json()
+        for key in data.keys():
+            setattr(w, key, data[key])
+        db.session.add(w)
+        db.session.commit()
+        return make_response(w.to_dict(), 200)
+    
+    def delete(self, id):
+        w_instance = Workout.query.filter_by(id=id).first()
+        if w_instance == None:
+            return make_response({'error':'Workout Not Found'}, 404)
+        db.session.delete(w_instance)
+        db.session.commit()
+        return make_response({}, 204)
+    
+api.add_resource(WorkoutsById, '/workouts/<int:id>')
+
+
+
+
+
+
+
+
+
+
+class Exercises( Resource ):
+    def get(self):
+        e_list = []
+        for e in Exercise.query.all():
+            e_dict = {
+                'id': e.id,
+                'exercise_name': e.exercise_name,
+                'description': e.description,
+                'muscles_hit': e.muscles_hit
+            }
+            e_list.append(e_dict)
+        return make_response(e_list, 200)
+    
+    def post(self):
+        data = request.get_json()
+        exercise = Exercise(exercise_name = data['exercise_name'],
+                          description = data['description'],
+                          muscles_hit = data['muscles_hit'])
+        db.session.add(exercise)
+        db.session.commit()
+        return make_response(exercise.to_dict(), 201)
+
+api.add_resource(Exercises, '/exercises')
+
+class ExercisesById( Resource ):
+    def get(self, id):
+        e_instance = Exercise.query.filter_by(id=id).first()
+        if e_instance == None:
+            return make_response({"error": "Exercise not found"}, 404)
+        return make_response(e_instance.to_dict(), 200)
+    
+    def patch(self, id):
+        e = Exercise.query.filter_by( id = id ).first()
+        if e == None:
+            return make_response({'error': 'Exercise Not Found.'}, 404)
+        data = request.get_json()
+        for key in data.keys():
+            setattr(e, key, data[key])
+        db.session.add(e)
+        db.session.commit()
+        return make_response(e.to_dict(), 200)
+    
+
+#########################################################
+#How can I delete an exercise that belongs to a workout?#
+#########################################################
+    def delete(self, id):
+        e_instance = Exercise.query.filter_by(id=id).first()
+        if e_instance == None:
+            return make_response({'error':'Exercise Not Found'}, 404)
+        db.session.delete(e_instance)
+        db.session.commit()
+        return make_response({}, 204)
+    
+api.add_resource(ExercisesById, '/exercises/<int:id>')
+
+
+
+
+
+
+
+
+
+
+
+class ExerciseLists( Resource ):
+    def get(self):
+        el_list = []
+        for el in ExerciseList.query.all():
+            el_dict = {
+                'id': el.id,
+                'workout_id':el.workout_id,
+                'exercise_id': el.exercise_id
+            }
+            el_list.append(el_dict)
+        return make_response(el_list, 200)
+
+    def post(self):
+        data = request.get_json()
+        exercise_list = ExerciseList(workout_id = data['workout_id'],
+                                   exercise_id = data['exercise_id'])
+        db.session.add(exercise_list)
+        try:
+            db.session.commit()
+            return make_response(exercise_list.to_dict(), 201)
+        except:
+            db.session.rollback()
+            return make_response( { 'error': 'Validation errors'}, 404)
+    
+api.add_resource(ExerciseLists, '/exercise_lists')
+
+class ExerciseListsById( Resource ):
+    def delete(self, id):
+        el_instance =ExerciseList.query.filter_by(id=id).first()
+        if el_instance == None:
+            return make_response({"error": "VendorSweet not found"}, 404)
+        db.session.delete(el_instance)
+        db.session.commit()
+        return make_response({}, 204)
+    
+api.add_resource(ExerciseListsById, '/exercise_lists/<int:id>')
+
+
+
+
+
 
 
 
