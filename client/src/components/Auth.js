@@ -21,7 +21,7 @@ export function Signup( { updateUser } ) {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("http://127.0.0.1:5555/signup", {
+            fetch("/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export function Login( {handleLogin} ) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("http://127.0.0.1:5555/login", {
+        fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export function Login( {handleLogin} ) {
 export function Logout({onLogout}) {
                                      
     function handleLogout() {
-        fetch("http://127.0.0.1:5555/logout", {
+        fetch("/logout", {
         method: "DELETE",
         }).then(() => onLogout())
     }
