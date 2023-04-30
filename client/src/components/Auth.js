@@ -7,6 +7,10 @@ export function Signup( { updateUser } ) {
 
     const history = useHistory()
 
+
+    //maybe an if statement would be a good way of showing that 
+    //a username is not uinque
+
     const formSchema = yup.object().shape({
         username: yup
         .string()
@@ -21,6 +25,7 @@ export function Signup( { updateUser } ) {
         .matches(/[0-9]/, 'Password requires a number')
         .matches(/[^\w]/, 'Password requires a symbol'),
     })
+
 
 
     const formik = useFormik({

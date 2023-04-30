@@ -1,11 +1,19 @@
-
+import { useEffect, useState } from 'react'
+import ExerciseMapped from './ExerciseMapped'
 
 function ExcerisePage() {
 
+    const [exercise, setExercise] = useState([])
+    
+    useEffect(() => {
+        fetch('http://localhost:5555/exercises')
+            .then(r => r.json())
+            .then(setExercise)
+    },[])
 
     return(
         <div>
-            <h1>This will host all the exercises</h1>
+            <ExerciseMapped exerciseArray={exercise}/>
         </div>
     )
 }

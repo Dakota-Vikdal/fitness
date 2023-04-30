@@ -8,8 +8,6 @@ from models import User, Workout, ExerciseList, Exercise
 api = Api(app)
 
 
-
-#taking this from the lesson Authenticating Users
 class HomePage(Resource):
     def get(self):
         return {'message': 'Welcome to my Home Page'}, 200
