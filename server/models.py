@@ -75,13 +75,13 @@ class Workout(db.Model, SerializerMixin):
 class Exercise(db.Model, SerializerMixin):
     __tablename__='exercises'
 
-    serialize_rules=( '-workouts', '-exerciselists' )
+    serialize_rules=( '-workouts', '-exerciselists', 'image_url' )
 
     id = db.Column(db.Integer, primary_key=True)
     exercise_name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     muscles_hit = db.Column(db.String, nullable=False)
-
+    image_url = db.Column(db.String)
 
     exerciselists = db.relationship('ExerciseList', backref='exercise')
     workouts = association_proxy('exerciselists', 'workout')

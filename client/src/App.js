@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import {useEffect, useState} from 'react'
 import ExercisePage from './components/ExercisePage'
 import WorkoutPage from './components/WorkoutPage'
+import { ExerciseProvider } from "./context/ExerciseContext";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,7 +32,7 @@ function App() {
 
   return (
      <div className="App">
-        {/* <header className="App-header"> */}
+      {/* <ExerciseProvider> */}
        <NavBar />
         <Switch>
             <Route path= '/signup' >
@@ -53,7 +54,7 @@ function App() {
               <Home user = {user}/>
             </Route>
         </Switch>
-      {/* // </header>  */}
+      {/* </ExerciseProvider> */}
     </div>
   );
 }
