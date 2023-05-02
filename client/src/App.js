@@ -10,6 +10,7 @@ import WorkoutPage from './components/WorkoutPage'
 function App() {
   const [user, setUser] = useState(null);
 
+
   useEffect(() => {
       fetch("http://localhost:5555/check_session").then((response) => {
           if (response.ok) {
@@ -40,11 +41,11 @@ function App() {
             <Route path= '/login'>
               <Login handleLogin = {handleLogin}/>
             </Route>
-            <Route path= '/logout' >
-              <Logout onLogout = {onLogout}/>
-            </Route>
+            {/* <Route path= '/logout' > */}
+              {/* <Logout onLogout = {onLogout} user={user} setExercise={setExercise}/> */}
+            {/* </Route> */}
             <Route path= '/exercisepage' >
-              <ExercisePage />
+              <ExercisePage onLogout={onLogout}/>
             </Route>
             <Route path= '/workoutpage' >
               <WorkoutPage />

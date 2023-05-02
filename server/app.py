@@ -135,7 +135,7 @@ class Logout(Resource):
 
     def delete(self):
         session['user_id'] = None
-        response = make_response({'msg':'been deleted yo'}, 200)
+        response = make_response({'msg':'user has been logged out yo'}, 200)
         return response
 api.add_resource(Logout, '/logout', endpoint='logout')
 

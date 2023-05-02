@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import ExerciseMapped from './ExerciseMapped'
 import DropDown from './DropDown'
 import NewExercise from './NewExercise'
+import {Logout} from './Auth'
 
-function ExcerisePage() {
-
+function ExcerisePage({onLogout}) {
+    //This might be the state we need to change//
     const [exercise, setExercise] = useState([])
-    
+    //////////////////////////////////////////////
     const [exerciseDropDown, setExerciseDropDown] = useState('')
+    console.log(exercise)
 
     const myFilter = filteredExercises =>
         filteredExercises.muscles_hit.includes(exerciseDropDown) || exerciseDropDown ==='All'
@@ -53,9 +55,10 @@ function ExcerisePage() {
     
     return(
         <div>
+            <Logout onLogout = {onLogout} setExercise={setExercise} />
             <NewExercise addExercise = {addExercise}/>
             <DropDown filterExercise = {changeExercise}/>
-            <ExerciseMapped exercise={exerciseList} updateExercise={updateExercise}/>
+            <ExerciseMapped exercises={exerciseList} updateExercise={updateExercise} />
             
         </div>
     )

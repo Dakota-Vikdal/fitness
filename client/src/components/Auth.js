@@ -157,10 +157,17 @@ export function Login( {handleLogin} ) {
 }
 
 
-export function Logout({onLogout}) {
+export function Logout({onLogout, setExercise}) {
                                      
     function handleLogout() {
-        fetch("/logout", {
+
+        setExercise([])
+        /*
+        change state to default values
+        */
+
+
+        fetch(`/logout`, {
         method: "DELETE",
         }).then(() => onLogout())
     }

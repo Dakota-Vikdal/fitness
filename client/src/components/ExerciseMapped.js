@@ -1,8 +1,8 @@
 import Exercise from './Exercise'
 
-function ExerciseMapped({exercise, updateExercise}) {
+function ExerciseMapped({exercises, updateExercise}) {
     
-    const exercises = exercise.map(exercise => 
+    const exercise = exercises.map(exercise => 
         <Exercise 
         key={exercise.id}
         {...exercise}
@@ -11,7 +11,7 @@ function ExerciseMapped({exercise, updateExercise}) {
         
     return(
         <div>
-            {exercises}
+            {exercise}
         </div>
     )
 }
