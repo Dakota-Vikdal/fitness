@@ -60,7 +60,10 @@ class User( db.Model, SerializerMixin ):
 class Workout(db.Model, SerializerMixin):
     __tablename__='workouts'
 
-    serialize_rules=('-exercises', '-user_id', '-exerciselists.workout' )
+
+    # If you remove '-exerciselists.workout' from the serialize_rules workouts will render 
+    # inside of exerciselists array
+    serialize_rules=('-user_id', '-exerciselists.exercises', '-exerciselists.workout' )
 
     id = db.Column(db.Integer, primary_key=True)
     workout_name = db.Column(db.String, nullable=False)
@@ -75,7 +78,9 @@ class Workout(db.Model, SerializerMixin):
 class Exercise(db.Model, SerializerMixin):
     __tablename__='exercises'
 
-    serialize_rules=( '-workouts', '-exerciselists', 'image_url' )
+    # If you remove '-exerciselists.exercise' from the serialize_rules exercise will render 
+    # inside of exerciselists array
+    serialize_rules=('-exerciselists.exercises', '-exerciselists.exercise')
 
     id = db.Column(db.Integer, primary_key=True)
     exercise_name = db.Column(db.String, nullable=False)
@@ -91,7 +96,7 @@ class Exercise(db.Model, SerializerMixin):
 class ExerciseList(db.Model, SerializerMixin):
     __tablename__='exerciselists'
 
-    serialize_rules=( '-exercise.exerciselists', '-workout_id', '-exercise_id' )
+    serialize_rules=( '-exercise.exerciselists', '-workout.exerciselists', '-workout_id', '-exercise_id' )
 
     id = db.Column(db.Integer, primary_key=True)
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)

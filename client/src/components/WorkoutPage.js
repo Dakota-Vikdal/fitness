@@ -1,9 +1,20 @@
-
+import { useEffect, useState } from 'react'
+import WorkoutMapped from './WorkoutMapped'
 
 function WorkoutPage() {
+
+    const [workout, setWorkout] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:5555/workouts')
+            .then(r => r.json())
+            .then(setWorkout)
+    },[])
+    
+
     return(
         <div>
-            <h1>This will be my workout page</h1>
+            <WorkoutMapped workout= {workout}/>
         </div>
     )
 }
