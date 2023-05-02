@@ -218,7 +218,7 @@ class WorkoutsById( Resource ):
         return make_response(w.to_dict(), 200)
     
     def delete(self, id):
-        w_instance = Workout.query.filter_by(id=id).first()
+        w_instance = Workout.query.filter_by( id = id ).first()
         if w_instance == None:
             return make_response({'error':'Workout Not Found'}, 404)
         db.session.delete(w_instance)
@@ -283,7 +283,7 @@ class ExercisesById( Resource ):
 #How can I delete an exercise that belongs to a workout?#
 #########################################################
     def delete(self, id):
-        e_instance = Exercise.query.filter_by(id=id).first()
+        e_instance = Exercise.query.filter_by( id = id ).first()
         if e_instance == None:
             return make_response({'error':'Exercise Not Found'}, 404)
         db.session.delete(e_instance)

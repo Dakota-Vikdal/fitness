@@ -19,6 +19,13 @@ function ExcerisePage({onLogout}) {
         setExerciseDropDown(newExercise)
     }
 
+    const removeExerciseFromState = goodbyeExercise => {
+        const filteredArray = exercise.filter(goodbyeExerciseObj => {
+          return goodbyeExerciseObj.id !== goodbyeExercise
+        })
+        setExercise(filteredArray)
+      }
+
 
     const updateExercise = freshExerciseObj => {
         setExercise( exercise.map( mObj => {
@@ -57,7 +64,10 @@ function ExcerisePage({onLogout}) {
             <Logout onLogout = {onLogout} setExercise={setExercise} />
             <NewExercise addExercise = {addExercise}/>
             <DropDown filterExercise = {changeExercise}/>
-            <ExerciseMapped exercises={exerciseList} updateExercise={updateExercise} />
+            <ExerciseMapped 
+                exercises={exerciseList} 
+                updateExercise={updateExercise} 
+                removeExerciseFromState={removeExerciseFromState} />
             
         </div>
     )

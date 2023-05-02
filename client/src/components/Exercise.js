@@ -1,7 +1,7 @@
 import './Exercise.css'
 import { useState } from 'react'
 
-function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise } ) {
+function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState } ) {
 
     //Maybe build out the filter via exercises.mucles_hit? 
     //That could be a valid way of attaching the exercises onto specific 
@@ -37,9 +37,15 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
     }
 
 
+    const handleDelete = () => {
+        fetch(`http://127.0.0.1:5555/exercises/${id}`, {method: 'DELETE'})
+        removeExerciseFromState(id)
+    }
+
 
     return(
         <div className='muscles'>
+            <button onClick={handleDelete} >🗑️</button>
             <button onClick={toggleEdit}>✏️</button>
             {editExercise ? <form onSubmit={commitToNewExercise}>
                 <input onChange={updateImage} value={newImage} type='image' placeholder='image'/>

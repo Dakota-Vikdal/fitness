@@ -58,12 +58,12 @@ class User( db.Model, SerializerMixin ):
 
 
 class Workout(db.Model, SerializerMixin):
-    __tablename__='workouts'
+    __tablename__ = 'workouts'
 
 
     # If you remove '-exerciselists.workout' from the serialize_rules workouts will render 
     # inside of exerciselists array
-    serialize_rules=('-user_id', '-exerciselists.exercises', '-exerciselists.workout' )
+    serialize_rules=('-user_id', '-exerciselists', 'exercises', '-exercises.exerciselists' )
 
     id = db.Column(db.Integer, primary_key=True)
     workout_name = db.Column(db.String, nullable=False)
@@ -76,11 +76,11 @@ class Workout(db.Model, SerializerMixin):
 
 
 class Exercise(db.Model, SerializerMixin):
-    __tablename__='exercises'
+    __tablename__ = 'exercises'
 
     # If you remove '-exerciselists.exercise' from the serialize_rules exercise will render 
     # inside of exerciselists array
-    serialize_rules=('-exerciselists.exercises', '-exerciselists.exercise')
+    serialize_rules = ( '-exerciselists.exercise', )
 
     id = db.Column(db.Integer, primary_key=True)
     exercise_name = db.Column(db.String, nullable=False)
