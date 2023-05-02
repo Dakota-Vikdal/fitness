@@ -32,15 +32,15 @@ if __name__ == '__main__':
         e19 = Exercise(exercise_name='Push-up', description='With your body in a plant position, arms fully extended, allow your body to descend until your upper arms are parallel to the ground, push yourself up until your arms are straight, repeat.', muscles_hit='Pectorals', image_url='')
         e20 = Exercise(exercise_name='Cable crossover', description='From a standing position grab a cable in each hand, take a forward stance and, while keeping your arms straight, pull them together until your hands touch or are close to doing so, allow the weight to come back out until your arms are spread like in a flying position once again, repeat.', muscles_hit='Pectorals', image_url='')
         
-        e21 = Exercise(exercise_name='Pull-up', description='', muscles_hit='Upper back', image_url='')
-        e22 = Exercise(exercise_name='Wide-grip barbell bent-over row', description='', muscles_hit='Upper back', image_url='')
-        e23 = Exercise(exercise_name='Shrugs', description='', muscles_hit='Upper back', image_url='')
-        e24 = Exercise(exercise_name='Close-grip seated cable row', description='', muscles_hit='Upper back', image_url='')
+        e21 = Exercise(exercise_name='Pull-up', description='', muscles_hit='Upperback', image_url='')
+        e22 = Exercise(exercise_name='Wide-grip barbell bent-over row', description='', muscles_hit='Upperback', image_url='')
+        e23 = Exercise(exercise_name='Shrugs', description='', muscles_hit='Upperback', image_url='')
+        e24 = Exercise(exercise_name='Close-grip seated cable row', description='', muscles_hit='Upperback', image_url='')
         
-        e25 = Exercise(exercise_name='Supine bridge', description='', muscles_hit='Lower back', image_url='')
-        e26 = Exercise(exercise_name='Back extension', description='', muscles_hit='Lower back', image_url='')
-        e27 = Exercise(exercise_name='Good-morning', description='', muscles_hit='Lower back', image_url='')
-        e28 = Exercise(exercise_name='Romanian deadlift', description='', muscles_hit='Lower back', image_url='')
+        e25 = Exercise(exercise_name='Supine bridge', description='', muscles_hit='Lowerback', image_url='')
+        e26 = Exercise(exercise_name='Back extension', description='', muscles_hit='Lowerback', image_url='')
+        e27 = Exercise(exercise_name='Good-morning', description='', muscles_hit='Lowerback', image_url='')
+        e28 = Exercise(exercise_name='Romanian deadlift', description='', muscles_hit='Lowerback', image_url='')
         
         e29 = Exercise(exercise_name='Sit-up', description='', muscles_hit='Abdomen', image_url='')
         e30 = Exercise(exercise_name='Bicycle crunch', description='', muscles_hit='Abdomen', image_url='')

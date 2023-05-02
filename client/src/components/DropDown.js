@@ -10,7 +10,6 @@ function DropDown({filterExercise}) {
             <option value="Forearms">Forearms</option>
             <option value="Shoulders">Shoulders</option>
             <option value="Pectorals">Pectorals</option>
-            <option value="Trapezius">Trapezius</option>
             <option value="Upperback">Upperback</option>
             <option value="Lowerback">Lowerback</option>
             <option value="Neck">Neck</option>
