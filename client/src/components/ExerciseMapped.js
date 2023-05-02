@@ -1,16 +1,12 @@
 import Exercise from './Exercise'
-import React, { useContext } from "react";
-import {ExercisesContext} from '../context/ExerciseContext'
 
-function ExerciseMapped({exercise}) {
+function ExerciseMapped({exercise, updateExercise}) {
     
-    // const { exercise } = useContext(ExercisesContext)
-    
-
     const exercises = exercise.map(exercise => 
         <Exercise 
         key={exercise.id}
         {...exercise}
+        updateExercise={updateExercise}
         />)
         
     return(
