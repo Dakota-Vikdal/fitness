@@ -1,4 +1,4 @@
-
+import './WorkoutList.css'
 
 
 function WorkoutList( { workout } ) {
@@ -8,7 +8,7 @@ function WorkoutList( { workout } ) {
     // console.log(elist)
 
     return(
-        <div>
+        <div className='big-muss'>
             <p>{workout.workout_name}</p>
             <p>{workout.exercises[0].exercise_name}</p>
             <p>{workout.exercises[0].description}</p>

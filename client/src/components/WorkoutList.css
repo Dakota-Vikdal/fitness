@@ -1,0 +1,9 @@
+.big-muss{
+    height: 225px;
+    width: 250px;
+    /* border: 15px dotted green; */
+    padding: 75px;
+    margin: 20px;
+    margin-left: 100px;
+    text-align: left
+}
