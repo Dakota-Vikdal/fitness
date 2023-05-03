@@ -3,9 +3,10 @@ from models import db, Exercise, Workout
 
 if __name__ == '__main__':
     with app.app_context():
-        print('Creating Exercise...')
+        print('Creating Exercise and Workout...')
 
         Exercise.query.delete()
+        Workout.query.delete()
 
         e1 = Exercise(exercise_name='Bicep curl', description='Begin with dumbells at your side, palms facing forward. With elbows remaining stationary at your side, bring weight up to shoulder level, descend weight back down to your sides, repeat.', muscles_hit='Biceps', image_url='https://www.inspireusafoundation.org/wp-content/uploads/2023/01/inner-bicep-curl-muscles.png')
         e2 = Exercise(exercise_name='Hammer curl', description='Begin with dumbells at your side, palms facing your body. With straight wrists and stationary elbows bring the weight straight up until they nearly touch your shoulders. Descend the weight, repeat.', muscles_hit='Biceps and forearms', image_url='https://www.inspireusafoundation.org/wp-content/uploads/2023/01/inner-bicep-curl-muscles.png')
@@ -80,6 +81,17 @@ if __name__ == '__main__':
 
         #Create an example workout for the user to get ideas from
 
+        w1 = Workout(workout_name = 'Monday Plum Day', user_id = '')
+        w2 = Workout(workout_name = 'Tuesday Groove Day', user_id = '')
+        w3 = Workout(workout_name = 'Wednesday Prince Day', user_id = '')
+        w4 = Workout(workout_name = 'Thursday Curves Day', user_id = '')
+        w5 = Workout(workout_name = 'Friday My Day', user_id = '')
+        w6 = Workout(workout_name = 'Saturday Matters Day', user_id = '')
+        w7 = Workout(workout_name = 'Sunday Fun Day', user_id = '')
+
+        workouts = [ w1, w2, w3, w4, w5, w6, w7 ]
+
         db.session.add_all(exercises)
+        db.session.add_all(workouts)
         db.session.commit()
         print('Seeding done!')

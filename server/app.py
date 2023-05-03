@@ -195,7 +195,8 @@ class Workouts( Resource ):
         #     }
         #     w_list.append(w_dict)
         
-    
+    ####I removed this from my plan because it was too much of a hassle...
+    ##I'll keep it here for now, just in case I change my mind############
     def post(self):
         data = request.get_json()
         workout = Workout(workout_name = data['workout_name'],

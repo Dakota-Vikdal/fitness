@@ -9,6 +9,7 @@ import WorkoutPage from './components/WorkoutPage'
 import { UserProvider } from "./context/User";
 import { UserContext } from "./context/User";
 import React, { useContext } from "react";
+import Header from './components/Header'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
   
   return (
      <div className="App">
+      <Header />
        <NavBar />
         <Switch>
             <Route path= '/signup' >

@@ -21,7 +21,7 @@ function NewExercise({addExercise}) {
     }
 
     return (
-        <div className='new-movie-form'> 
+        <div className='new-exercise-form'> 
             <form onSubmit ={handleSubmit}>
                 <input onChange= {nameChange} type='text' name='exercise_name' placeholder='Name of exercise' />
                 <input onChange= {descriptionChange} type='text' name='description' step='0.01' placeholder='Description of exercise' />

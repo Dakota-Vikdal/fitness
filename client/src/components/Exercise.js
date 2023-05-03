@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState } ) {
 
+
     //Maybe build out the filter via exercises.mucles_hit? 
     //That could be a valid way of attaching the exercises onto specific 
     const [ editExercise, setEditExercise ] = useState(false)

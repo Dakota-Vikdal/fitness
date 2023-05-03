@@ -67,8 +67,8 @@ function ExcerisePage({onLogout}) {
             <ExerciseMapped 
                 exercises={exerciseList} 
                 updateExercise={updateExercise} 
-                removeExerciseFromState={removeExerciseFromState} />
-            
+                removeExerciseFromState={removeExerciseFromState}
+             />
         </div>
     )
 }

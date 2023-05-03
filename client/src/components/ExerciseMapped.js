@@ -1,6 +1,6 @@
 import Exercise from './Exercise'
 
-function ExerciseMapped({exercises, updateExercise, removeExerciseFromState}) {
+function ExerciseMapped({ exercises, updateExercise, removeExerciseFromState }) {
     
     const exercise = exercises.map(exercise => 
         <Exercise 
