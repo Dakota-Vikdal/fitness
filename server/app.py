@@ -180,19 +180,27 @@ api.add_resource(ClearSession, '/clear', endpoint='clear')
 
 class Workouts( Resource ):
     def get(self):
-        w_list = []
-        for w in Workout.query.all():
-            w_dict = {
-                'id': w.id,
-                'workout_name': w.workout_name
-            }
-            w_list.append(w_dict)
+        w_list = [w.to_dict() for w in Workout.query.all()]
+
+        if w_list == None:
+            return make_response({'msg': 'error bois'}, 404)
         return make_response(w_list, 200)
+        
+
+        # w_list = []
+        # for w in Workout.query.all():
+        #     w_dict = {
+        #         'id': w.id,
+        #         'workout_name': w.workout_name
+        #     }
+        #     w_list.append(w_dict)
+        
     
     def post(self):
         data = request.get_json()
         workout = Workout(workout_name = data['workout_name'],
-                          user_id = data['user_id'])
+                          user_id = data['user_id']
+                          )
         db.session.add(workout)
         db.session.commit()
         return make_response(workout.to_dict(), 201)

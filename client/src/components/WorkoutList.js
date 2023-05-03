@@ -2,16 +2,18 @@
 
 
 function WorkoutList( { workout } ) {
-    // console.log(workout.workout_name)
-    console.log(workout.exerciselists)
+    console.log(workout)
 
     // const elist = workout.map(e => {return e.exerciselists})
     // console.log(elist)
 
     return(
         <div>
-            <h1>{workout.workout_name}</h1>
-            {/* <h1>{workout.exercise.exercise_name}</h1> */}
+            <p>{workout.workout_name}</p>
+            <p>{workout.exercises[0].exercise_name}</p>
+            <p>{workout.exercises[0].description}</p>
+            <p>{workout.exercises[0].muscles_hit}</p>
+            <p>{workout.exercises[0].image_url}</p>
         </div>
     )
 }

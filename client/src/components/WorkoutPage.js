@@ -10,6 +10,7 @@ function WorkoutPage() {
             .then(r => r.json())
             .then(setWorkout)
     },[])
+
     
     
     return(

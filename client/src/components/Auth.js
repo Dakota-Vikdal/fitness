@@ -2,10 +2,16 @@ import { useState } from 'react'
 import {useHistory} from 'react-router-dom'
 import {useFormik} from 'formik'
 import * as yup from "yup"
+import { UserContext } from "../context/User";
+import React, { useContext } from "react";
 
-export function Signup( { updateUser } ) {
+export function Signup() {
+
+    const {setUser} = useContext(UserContext)
 
     const history = useHistory()
+
+    const updateUser = (user) => setUser(user)
 
 
     //maybe an if statement would be a good way of showing that 
@@ -96,10 +102,15 @@ export function Signup( { updateUser } ) {
 
 }
 
-export function Login( {handleLogin} ) {
-
+export function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const {setUser} = useContext(UserContext)
+
+    function handleLogin(user) {
+        setUser(user);
+    }
       
     const history = useHistory()
 
@@ -157,7 +168,12 @@ export function Login( {handleLogin} ) {
 }
 
 
-export function Logout({onLogout, setExercise}) {
+export function Logout( { setExercise } ) {
+    const {setUser} = useContext(UserContext)
+
+    function onLogout() {
+        setUser(null);
+    }
                                      
     function handleLogout() {
 

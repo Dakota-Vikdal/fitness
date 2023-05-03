@@ -61,7 +61,7 @@ function ExcerisePage({onLogout}) {
     
     return(
         <div>
-            <Logout onLogout = {onLogout} setExercise={setExercise} />
+            <Logout  setExercise={setExercise} />
             <NewExercise addExercise = {addExercise}/>
             <DropDown filterExercise = {changeExercise}/>
             <ExerciseMapped 

@@ -1,60 +1,49 @@
 import './stylesheets/App.css';
 import { Switch, Route } from 'react-router-dom'
-import { Signup, Login, Logout} from './components/Auth.js'
+import { Signup, Login} from './components/Auth.js'
 import Home from './components/Home'
 import NavBar from './components/NavBar'
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import ExercisePage from './components/ExercisePage'
 import WorkoutPage from './components/WorkoutPage'
+import { UserProvider } from "./context/User";
+import { UserContext } from "./context/User";
+import React, { useContext } from "react";
+
 
 function App() {
-  const [user, setUser] = useState(null);
-
-
+  // const [user, setUser] = useState(null);
+  const { setUser } = useContext(UserContext)
+  
   useEffect(() => {
       fetch("http://localhost:5555/check_session").then((response) => {
           if (response.ok) {
               response.json().then((user) => setUser(user));
           }
       });
-  }, []);
+  }, [setUser]);
 
-  function handleLogin(user) {
-      setUser(user);
-  }
-
-  function onLogout() {
-      setUser(null);
-  }
-
-  const updateUser = (user) => setUser(user)
-
-
+  
   return (
      <div className="App">
-      {/* <ExerciseProvider> */}
        <NavBar />
         <Switch>
             <Route path= '/signup' >
-              <Signup updateUser = {updateUser}/>
+              <Signup />
             </Route>
             <Route path= '/login'>
-              <Login handleLogin = {handleLogin}/>
+              <Login />
             </Route>
-            {/* <Route path= '/logout' > */}
-              {/* <Logout onLogout = {onLogout} user={user} setExercise={setExercise}/> */}
-            {/* </Route> */}
             <Route path= '/exercisepage' >
-              <ExercisePage onLogout={onLogout}/>
+              <ExercisePage />
             </Route>
             <Route path= '/workoutpage' >
               <WorkoutPage />
             </Route>
             <Route path ='/'>
-              <Home user = {user}/>
+              <Home />
             </Route>
         </Switch>
-      {/* </ExerciseProvider> */}
     </div>
   );
 }
