@@ -288,9 +288,6 @@ class ExercisesById( Resource ):
         return make_response(e.to_dict(), 200)
     
 
-#########################################################
-#How can I delete an exercise that belongs to a workout?#
-#########################################################
     def delete(self, id):
         e_instance = Exercise.query.filter_by( id = id ).first()
         if e_instance == None:
