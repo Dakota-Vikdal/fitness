@@ -8,8 +8,8 @@ if __name__ == '__main__':
         Exercise.query.delete()
         Workout.query.delete()
 
-        e1 = Exercise(exercise_name='Bicep curl', description='Begin with dumbells at your side, palms facing forward. With elbows remaining stationary at your side, bring weight up to shoulder level, descend weight back down to your sides, repeat.', muscles_hit='Biceps', image_url='https://www.inspireusafoundation.org/wp-content/uploads/2023/01/inner-bicep-curl-muscles.png')
-        e2 = Exercise(exercise_name='Hammer curl', description='Begin with dumbells at your side, palms facing your body. With straight wrists and stationary elbows bring the weight straight up until they nearly touch your shoulders. Descend the weight, repeat.', muscles_hit='Biceps and forearms', image_url='https://www.inspireusafoundation.org/wp-content/uploads/2023/01/inner-bicep-curl-muscles.png')
+        e1 = Exercise(exercise_name='Bicep curl', description='Begin with dumbells at your side, palms facing forward. With elbows remaining stationary at your side, bring weight up to shoulder level, descend weight back down to your sides, repeat.', muscles_hit='Biceps', image_url='')
+        e2 = Exercise(exercise_name='Hammer curl', description='Begin with dumbells at your side, palms facing your body. With straight wrists and stationary elbows bring the weight straight up until they nearly touch your shoulders. Descend the weight, repeat.', muscles_hit='Biceps and forearms', image_url='')
         e3 = Exercise(exercise_name='Concentration curl', description='This exercise is great for isolating the bicep tissue. Begin in a seated position, rest the elbow of the arm with the weight on the inside of your thigh. Allow the weight to descend, once the arm has straightened, curl the weight back up to your chest, repeat.', muscles_hit='Biceps', image_url='')
         e4 = Exercise(exercise_name='Ez-Bar curl', description='Begin standing with an Ez-Bar at your waist, palms facing away from you. Curl the weight up to your chest, descend it back down to your waist, repeat.', muscles_hit='Biceps', image_url='')
         

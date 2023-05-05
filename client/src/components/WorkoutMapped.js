@@ -13,6 +13,7 @@ function WorkoutMapped({workout}){
     
     return(
         <div>
+            
             {workouts}
         </div>
     )
