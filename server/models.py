@@ -80,7 +80,8 @@ class Exercise(db.Model, SerializerMixin):
 
     # If you remove '-exerciselists.exercise' from the serialize_rules exercise will render 
     # inside of exerciselists array
-    serialize_rules = ( '-workouts.exerciselists,', )
+    serialize_rules = ( '-workouts.exerciselists', 'workouts', 
+                       '-workouts.exercises')
 
     id = db.Column(db.Integer, primary_key=True)
     exercise_name = db.Column(db.String, nullable=False)

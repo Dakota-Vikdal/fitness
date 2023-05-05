@@ -5,6 +5,7 @@ import {useState} from 'react'
 function WorkoutList( { workout } ) {
     console.log(workout)
     const [showWorkout, setShowWorkout] = useState(false)
+    
 
     const handleClick = () => {
         setShowWorkout(!showWorkout)

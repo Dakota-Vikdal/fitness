@@ -6,7 +6,6 @@ import NavBar from './components/NavBar'
 import {useEffect} from 'react'
 import ExercisePage from './components/ExercisePage'
 import WorkoutPage from './components/WorkoutPage'
-import { UserProvider } from "./context/User";
 import { UserContext } from "./context/User";
 import React, { useContext } from "react";
 import Header from './components/Header'
@@ -17,7 +16,7 @@ function App() {
   const { setUser } = useContext(UserContext)
   
   useEffect(() => {
-      fetch("http://localhost:5555/check_session").then((response) => {
+      fetch("/check_session").then((response) => {
           if (response.ok) {
               response.json().then((user) => setUser(user));
           }

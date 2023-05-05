@@ -239,23 +239,18 @@ api.add_resource(WorkoutsById, '/workouts/<int:id>')
 
 
 
-
-
-
-
-
-
 class Exercises( Resource ):
     def get(self):
         e_list = []
         for e in Exercise.query.all():
-            e_dict = {
-                'id': e.id,
-                'exercise_name': e.exercise_name,
-                'description': e.description,
-                'muscles_hit': e.muscles_hit
-            }
-            e_list.append(e_dict)
+            e_list.append( e.to_dict() )
+            # e_dict = {
+            #     'id': e.id,
+            #     'exercise_name': e.exercise_name,
+            #     'description': e.description,
+            #     'muscles_hit': e.muscles_hit
+            # }
+            # e_list.append(e_dict)
         return make_response(e_list, 200)
     
     def post(self):
@@ -322,24 +317,24 @@ class ExerciseLists( Resource ):
 
     def post(self):
         data = request.get_json()
-        exercise_list = ExerciseList(workout_id = data['workout_id'],
-                                   exercise_id = data['exercise_id'])
-        db.session.add(exercise_list)
+        exercise_list = ExerciseList( workout_id = data['workout_id'],
+                                   exercise_id = data['exercise_id'] )
+        db.session.add( exercise_list )
         try:
             db.session.commit()
-            return make_response(exercise_list.to_dict(), 201)
+            return make_response( exercise_list.to_dict(), 201 )
         except:
             db.session.rollback()
             return make_response( { 'error': 'Validation errors'}, 404)
     
-api.add_resource(ExerciseLists, '/exercise_lists')
+api.add_resource( ExerciseLists, '/exercise_lists' )
 
 class ExerciseListsById( Resource ):
-    def delete(self, id):
-        el_instance =ExerciseList.query.filter_by(id=id).first()
+    def delete( self, id ):
+        el_instance =ExerciseList.query.filter_by( id = id ).first()
         if el_instance == None:
-            return make_response({"error": "VendorSweet not found"}, 404)
-        db.session.delete(el_instance)
+            return make_response({ "error": "VendorSweet not found" }, 404)
+        db.session.delete( el_instance )
         db.session.commit()
         return make_response({}, 204)
     
