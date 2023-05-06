@@ -7,8 +7,8 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
     const [ editExercise, setEditExercise ] = useState(false)
     const toggleEdit = () => setEditExercise( e => !e )
 
-    const [ newImage, setNewImage ] = useState(image_url)
-    const updateImage = e => setNewImage( e.target.value )
+    // const [ newImage, setNewImage ] = useState(image_url)
+    // const updateImage = e => setNewImage( e.target.value )
 
     const [ newExercise, setNewExercise ] = useState(image_url)
     const updateExercises = e => setNewExercise( e.target.value )
@@ -25,7 +25,6 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {
-                image_url: newImage,
                 exercise_name: newExercise,
                 muscles_hit: newMuscle,
                 description: newDescription
@@ -53,7 +52,7 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
          <div className='card'>
             
              {editExercise ? <form onSubmit={commitToNewExercise} className='form'>
-                 <input onChange={updateImage} value={newImage} type='image' placeholder='image'/>
+                 {/* <input onChange={updateImage} value={newImage} type='image' placeholder='image'/> */}
                  <input onChange={updateExercises} value={newExercise} type='text' placeholder='exercise'/>
                  <input onChange={updateDescription} value={newDescription} type='text' placeholder='description'/>
                  <input onChange={updateMuscle} value={newMuscle} type='text' placeholder='muscle'/>
@@ -65,8 +64,8 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
                     return <li>{exercise.workout.workout_name}</li>
                 })} */}
 
-                 <img src={image_url} alt='Not available'/>
-                <p>Exercise: {exercise_name}</p>
+                 {/* <img src={image_url} alt='Not available'/> */}
+                 <p>Exercise: {exercise_name}</p>
                  <p>Muscles worked: {muscles_hit}</p>
                  <p>Description: {description}</p> 
              </div>}  
