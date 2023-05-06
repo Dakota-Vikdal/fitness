@@ -9,17 +9,28 @@
 } */ 
 
 .big-muss {
-    margin: 50px;
+    display: block;
+    width: 100px; 
+    margin-left: 10px;
+    margin: auto;
     text-align:left;
-    position: relative
+    position: relative;
 }
 
 .exercises {
-    height: 225px;
+    margin: 25px;
+    float: left;
+    width: 25%;
+    height:275px;
+    margin-left: 250px;
+    border: 15px solid rgb(129, 108, 108);
+    border-radius: 50px;
+    background: beige
+    /* height: 225px;
     width: 250px;
     border: 15px dotted rgb(172, 201, 172);
     padding: 75px;
     margin: 20px;
     margin-left: 450px;
-    text-align: left
+    text-align: left */
 }

@@ -1,11 +1,9 @@
 import './Exercise.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState } ) {
+function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState, exerciseLists } ) {
 
 
-    //Maybe build out the filter via exercises.mucles_hit? 
-    //That could be a valid way of attaching the exercises onto specific 
     const [ editExercise, setEditExercise ] = useState(false)
     const toggleEdit = () => setEditExercise( e => !e )
 
@@ -43,24 +41,37 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
         removeExerciseFromState(id)
     }
 
+    // const [isFlipped, setIsFlipped] = useState(false);
 
+    // const handleClick = () => {
+    //     setIsFlipped(!isFlipped);
+    //   }
+
+    // console.log(exercise_id)
+    // console.log(workout_id)
     return(
-        <div className='muscles'>
-            <button onClick={handleDelete} >🗑️</button>
-            <button onClick={toggleEdit}>✏️</button>
-            {editExercise ? <form onSubmit={commitToNewExercise}>
-                <input onChange={updateImage} value={newImage} type='image' placeholder='image'/>
-                <input onChange={updateExercises} value={newExercise} type='text' placeholder='exercise'/>
-                <input onChange={updateDescription} value={newDescription} type='text' placeholder='description'/>
-                <input onChange={updateMuscle} value={newMuscle} type='text' placeholder='muscle'/>
-                <input type="submit"/>
-            </form> :
-            <div>
-                <img src={image_url} alt='Not available'/>
+         <div className='card'>
+            
+             {editExercise ? <form onSubmit={commitToNewExercise} className='form'>
+                 <input onChange={updateImage} value={newImage} type='image' placeholder='image'/>
+                 <input onChange={updateExercises} value={newExercise} type='text' placeholder='exercise'/>
+                 <input onChange={updateDescription} value={newDescription} type='text' placeholder='description'/>
+                 <input onChange={updateMuscle} value={newMuscle} type='text' placeholder='muscle'/>
+                 <input type="submit"/>
+             </form> :
+             <div>
+
+                {/* {exerciseLists.map(exercise => {              
+                    return <li>{exercise.workout.workout_name}</li>
+                })} */}
+
+                 <img src={image_url} alt='Not available'/>
                 <p>Exercise: {exercise_name}</p>
-                <p>Muscles worked: {muscles_hit}</p>
-                <p>Description: {description}</p> 
-            </div>}
+                 <p>Muscles worked: {muscles_hit}</p>
+                 <p>Description: {description}</p> 
+             </div>}  
+             <button className = 'button' onClick={handleDelete} >🗑️</button>
+             <button onClick={toggleEdit}>✏️</button>    
         </div>
     )
 }

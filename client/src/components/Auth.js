@@ -4,6 +4,7 @@ import {useFormik} from 'formik'
 import * as yup from "yup"
 import { UserContext } from "../context/User";
 import React, { useContext } from "react";
+import './Auth.css'
 
 export function Signup() {
 
@@ -60,21 +61,23 @@ export function Signup() {
 
 
     return (
-        <div>
-            <form onSubmit={formik.handleSubmit}>
+        <div className='signup'>
+            <form onSubmit={formik.handleSubmit}  >
                 <h2>Signup!</h2>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input 
-                    type="text"
-                    name="username"
-                    id="username"
-                    value={formik.values.username}
-                    onChange={formik.handleChange}
-                    />
+                <div className='inner-signup'>
+                    <div>
+                        <label htmlFor="username">Username </label>
+                        <input 
+                        type="text"
+                        name="username"
+                        id="username"
+                        value={formik.values.username}
+                        onChange={formik.handleChange}
+                        />
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password </label>
                     <input 
                         type="password"
                         id="password"
@@ -85,17 +88,20 @@ export function Signup() {
                     <p style={{ color: "fuchsia" }}> {formik.errors.password}</p>
                 </div>
                 <div>
-                    <label htmlFor="email">Email Address</label>
-                    <input 
-                    type="text"
-                    name="email"
-                    id="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    />
+                    <div>
+                        <label htmlFor="email">Email </label>
+                        <input 
+                        type="text"
+                        name="email"
+                        id="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        />
+                    </div>
                 </div>
                 <p style={{ color: "fuchsia" }}> {formik.errors.email}</p>
                 <button type="submit">Submit</button>
+                
             </form>
         </div>
     )
@@ -136,33 +142,41 @@ export function Login() {
 
 
     return(
-        <div>
+        <div className = 'login'>
+            <form onSubmit={handleSubmit}>
             <h1>Welcome Back!</h1>
             <h3>Ready to get fit? If so, login below.</h3>
-            <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)} />
+                    <div>
+                        <label>Username </label>
+                        <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)} />
+                    </div>
                 </div>
                 <div>
-                    <label>password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)} />
+                    <div>
+                        <label>password </label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)} />
+                    </div>
                 </div>
                 <div>
-                    <input type='submit' />
+                    <div>
+                        <input type='submit' />
+                    </div>
                 </div>
             </form>
+            
+            
         </div>
     )
 }

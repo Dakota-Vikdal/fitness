@@ -4,12 +4,12 @@ import { NavLink } from "react-router-dom";
 function NavBar() {
     const linkStyles = {
         display: "inline-block",
-        width: "200px",
+        width: "75px",
         padding: "12px",
         margin: "0 6px 6px",
-        background: "#2d1606",
+        background: "pink",
         textDecoration: "none",
-        color: "white",
+        color: "black",
       };
 
     return (
@@ -19,7 +19,7 @@ function NavBar() {
                 exact
                 style={linkStyles}
                 activeStyle={{
-                background: "maroon", 
+                background: "beige", 
                 }}
             >
                 Home
@@ -29,7 +29,7 @@ function NavBar() {
                 exact
                 style={linkStyles}
                 activeStyle={{
-                background: "maroon",
+                background: "beige",
                 }}
             >
                 signup
@@ -39,7 +39,7 @@ function NavBar() {
                 exact
                 style={linkStyles}
                 activeStyle={{
-                background: "maroon",
+                background: "beige",
                 }}
             >
                 login
@@ -49,7 +49,7 @@ function NavBar() {
                 exact
                 style={linkStyles}
                 activeStyle={{
-                background: "maroon",
+                background: "beige",
                 }}
             >
                 Exercises
@@ -59,7 +59,7 @@ function NavBar() {
                 exact
                 style={linkStyles}
                 activeStyle={{
-                background: "maroon",
+                background: "beige",
                 }}
             >
                 Workouts

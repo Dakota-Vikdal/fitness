@@ -305,14 +305,16 @@ api.add_resource(ExercisesById, '/exercises/<int:id>')
 
 class ExerciseLists( Resource ):
     def get(self):
-        el_list = []
-        for el in ExerciseList.query.all():
-            el_dict = {
-                'id': el.id,
-                'workout_id':el.workout_id,
-                'exercise_id': el.exercise_id
-            }
-            el_list.append(el_dict)
+        el_list = [el.to_dict() for el in ExerciseList.query.all()]
+        
+        # el_list = []
+        # for el in ExerciseList.query.all():
+        #     el_dict = {
+        #         'id': el.id,
+        #         'workout_id':el.workout_id,
+        #         'exercise_id': el.exercise_id
+        #     }
+        #     el_list.append(el_dict)
         return make_response(el_list, 200)
 
     def post(self):
@@ -330,6 +332,14 @@ class ExerciseLists( Resource ):
 api.add_resource( ExerciseLists, '/exercise_lists' )
 
 class ExerciseListsById( Resource ):
+    def get(self, id):
+        el_instance = ExerciseList.query.filter_by( id = id ).first()
+        if el_instance == None:
+            return make_response({"error": "Exercise not found"}, 404)
+        return make_response(el_instance.to_dict(), 200)
+    
+
+
     def delete( self, id ):
         el_instance =ExerciseList.query.filter_by( id = id ).first()
         if el_instance == None:

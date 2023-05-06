@@ -97,7 +97,9 @@ class Exercise(db.Model, SerializerMixin):
 class ExerciseList(db.Model, SerializerMixin):
     __tablename__='exerciselists'
 
-    serialize_rules=( '-exercise.exerciselists', '-workout.exerciselists', '-workout_id', '-exercise_id' )
+    # serialize_rules=( '-exercise.exerciselists', '-workout.exerciselists', '-workout_id', '-exercise_id',  )
+    serialize_rules = ( '-exercise.exerciselists', '-workout.exerciselists', '-workout.exercises' )
+
 
     id = db.Column(db.Integer, primary_key=True)
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
