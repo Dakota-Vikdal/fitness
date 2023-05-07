@@ -9,7 +9,8 @@
 
 
 .navbar {
-    background-color: var(--secondary-color);
+    background-color: beige;
+    /* background-color: var(--secondary-color); */
     color: var(--text-color);
     height: 60px;
     display: flex;

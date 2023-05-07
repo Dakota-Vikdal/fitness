@@ -1,4 +1,9 @@
  .card{
+  position: relative;
+ }
+ 
+ .card-front{
+   /* position: absolute; */
    float: left;
    width: 25%;
    height:275px;
@@ -15,6 +20,10 @@
 
  .form{
    margin: 75px
+ }
+
+ .button2 {
+  margin: 10px;
  }
   
  /* img{

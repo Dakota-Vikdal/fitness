@@ -1,8 +1,23 @@
 import './Exercise.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState, exerciseLists } ) {
 
+    // const [isOpen, setIsOpen] = useState(false)
+    // const toggleOpen = () => setIsOpen(e => !e)
+    
+    const [showExerciseLists, setShowExerciseLists] = useState(false);
+    console.log(showExerciseLists)
+
+    const handleButtonClick = (e) => {
+        setShowExerciseLists(e => !e);
+      }
+
+    // function handleClick() {
+    //     {exerciseLists.map(exercise => {              
+    //         return <li>{exercise.workout.workout_name}</li>
+    //     })}
+    //   }
 
     const [ editExercise, setEditExercise ] = useState(false)
     const toggleEdit = () => setEditExercise( e => !e )
@@ -40,39 +55,53 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
         removeExerciseFromState(id)
     }
 
-    // const [isFlipped, setIsFlipped] = useState(false);
+    // const exercises = exerciseLists.map(exercise => {              
+    //     return <li key={exercise.workout.id}>{exercise.workout.workout_name}</li>})
 
-    // const handleClick = () => {
-    //     setIsFlipped(!isFlipped);
-    //   }
+    console.log(exerciseLists)
 
-    // console.log(exercise_id)
-    // console.log(workout_id)
     return(
-         <div className='card'>
-            
-             {editExercise ? <form onSubmit={commitToNewExercise} className='form'>
-                 {/* <input onChange={updateImage} value={newImage} type='image' placeholder='image'/> */}
-                 <input onChange={updateExercises} value={newExercise} type='text' placeholder='exercise'/>
-                 <input onChange={updateDescription} value={newDescription} type='text' placeholder='description'/>
-                 <input onChange={updateMuscle} value={newMuscle} type='text' placeholder='muscle'/>
-                 <input type="submit"/>
-             </form> :
-             <div>
+        <div className='card'>
+            <div className='card-front'>
+                
+                {editExercise ? <form onSubmit={commitToNewExercise} className='form'>
+                    {/* <input onChange={updateImage} value={newImage} type='image' placeholder='image'/> */}
+                    <input onChange={updateExercises} value={newExercise} type='text' placeholder='exercise'/>
+                    <input onChange={updateDescription} value={newDescription} type='text' placeholder='description'/>
+                    <input onChange={updateMuscle} value={newMuscle} type='text' placeholder='muscle'/>
+                    <input type="submit"/>
+                </form> :
+                <div>
 
-                {/* {exerciseLists.map(exercise => {              
-                    return <li>{exercise.workout.workout_name}</li>
-                })} */}
+                    
 
-                 {/* <img src={image_url} alt='Not available'/> */}
-                 <p>Exercise: {exercise_name}</p>
-                 <p>Muscles worked: {muscles_hit}</p>
-                 <p>Description: {description}</p> 
-             </div>}  
-             <button className = 'button' onClick={handleDelete} >🗑️</button>
-             <button onClick={toggleEdit}>✏️</button>    
+                    {/* <img src={image_url} alt='Not available'/> */}
+                    <p>Exercise: {exercise_name}</p>
+                    <p>Muscles worked: {muscles_hit}</p>
+                    <p>Description: {description}</p> 
+                </div>}  
+                <button className = 'button' onClick={handleDelete} >🗑️</button>
+                <button onClick={toggleEdit}>✏️</button>  
+                <button className='button2' onClick={handleButtonClick}>Show Workouts</button>
+                {showExerciseLists && (
+                    <div>
+                        {exerciseLists.map(exercise => {              
+                            return <li key={exercise.workout.id}>{exercise.workout.workout_name}</li>
+                        })}
+                                                
+                        {/* {exercises.map(exercise => {              
+                        return <li key={exercise.workout.id}>{exercise}</li>
+                        })} */}
+                    </div>
+                )} 
+            </div>
+                
         </div>
     )
 }
+
+// {exerciseLists.map(exercise => {              
+//     return <li key={exercise.workout.id}>{exercise.workout.workout_name}</li>
+//  })}
 
 export default Exercise
