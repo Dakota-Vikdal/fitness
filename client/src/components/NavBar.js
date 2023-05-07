@@ -14,7 +14,7 @@ function NavBar() {
 
     return (
         <div className="navbar">
-            <NavLink
+            {/* <NavLink
                 to="/home"
                 exact
                 style={linkStyles}
@@ -23,7 +23,7 @@ function NavBar() {
                 }}
             >
                 Home
-            </NavLink>
+            </NavLink> */}
             <NavLink
                 to="/signup"
                 exact

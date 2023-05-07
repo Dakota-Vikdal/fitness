@@ -1,10 +1,105 @@
-#header{
+/* #header{
+    text-align: left;
     height: 50px;
     background-color: pink;
     margin: 5px;
     color: black;
     
+} */
+
+
+.navbar {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    font-family: "ITC Machine Bold", roboto-slab;
+  }
+  .navbar-logo {
+    color: var(--text-color);
+    font-size: 50px;
+    font-family: fantasy;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .navbar-link {
+    color: var(--text-color);
+    font-size: 18px;
+    font-family: fantasy;
+    margin-bottom: 10px;
+    text-decoration: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .navbar-link:hover,
+  .navbar-link.active {
+    background-color: var(--primary-color);
+  }
+  .navbar-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    cursor: pointer;
+  }
+  .navbar-hamburger span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transform-origin: center;
+    transition: all 0.3s ease;
+  }
+  .navbar-hamburger.is-active span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .navbar-hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  .navbar-hamburger.is-active span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  @media screen and (min-width: 768px) {
+    .navbar {
+      height: auto;
+    }
+    .navbar-menu {
+      display: none;
+    }
+    .navbar-links {
+      display: flex;
+      position: static;
+      width: auto;
+      background-color: transparent;
+      padding: 0;
+    }
+    .navbar-link {
+      margin-bottom: 0;
+      margin-right: 20px;
+      font-size: 18px;
+      padding: 0;
+    }
 }
+
+
+
 /* img{
     height: auto;
     width: auto
