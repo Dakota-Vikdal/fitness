@@ -44,6 +44,7 @@ function WorkoutMapped({workout}){
     })
         .then(r => r.json())
         .then(handleNewExercise)
+        e.target.reset()
     }
     
 

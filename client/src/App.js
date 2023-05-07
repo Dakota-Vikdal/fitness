@@ -2,7 +2,6 @@ import './stylesheets/App.css';
 import { Switch, Route } from 'react-router-dom'
 import { Signup, Login} from './components/Auth.js'
 import Home from './components/Home'
-import NavBar from './components/NavBar'
 import {useEffect} from 'react'
 import ExercisePage from './components/ExercisePage'
 import WorkoutPage from './components/WorkoutPage'
@@ -27,7 +26,6 @@ function App() {
   return (
      <div className="App">
       <Header />
-       <NavBar />
         <Switch>
             <Route path= '/signup' >
               <Signup />

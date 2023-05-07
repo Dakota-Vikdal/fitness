@@ -18,6 +18,7 @@ function Header() {
         </div>
       </div>
       <div className={`navbar-links ${isOpen && 'is-active'}`}>
+        <Link to='/' className="navbar-link">Home</Link>
         <Link to='/exercisepage' className="navbar-link">Exercises</Link>
         <Link to='/workoutpage' className="navbar-link">Workouts</Link>
         <Link to='/login' className="navbar-link">Login</Link>

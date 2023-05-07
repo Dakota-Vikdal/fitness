@@ -18,6 +18,7 @@ function NewExercise({addExercise}) {
             description: newDescription
         }
         addExercise(newExercise)
+        e.target.reset()
     }
 
     return (
