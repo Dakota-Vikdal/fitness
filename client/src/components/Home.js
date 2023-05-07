@@ -16,7 +16,6 @@ function Home() {
         } else {
         return (
         <div>
-          <h2>Welcome!</h2>
           {/* <div className='img'> */}
             <img src='https://thumbs.dreamstime.com/b/time-fitness-equipment-dark-background-84164532.jpg'/>
           {/* </div> */}
