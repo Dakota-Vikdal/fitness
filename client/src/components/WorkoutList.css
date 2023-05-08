@@ -12,9 +12,10 @@
     display: block;
     width: 100px; 
     margin-left: 10px;
-    margin: auto;
+    /* margin: auto; */
     text-align:left;
     position: relative;
+    padding: 10px;
 }
 
 .exercises {

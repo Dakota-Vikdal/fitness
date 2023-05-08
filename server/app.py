@@ -1,7 +1,6 @@
 from flask import request, make_response, session, jsonify, flash
 from flask_restful import Resource, Api
 from sqlalchemy.exc import IntegrityError
-#where should i import api from? I just removed it from config
 from config import app, db, bcrypt
 from models import User, Workout, ExerciseList, Exercise
 
@@ -22,7 +21,6 @@ class Users(Resource):
             username=form_json['username'],
             email=form_json['email']
         )
-        # import ipdb; ipdb.set_trace()
         db.session.add(new_user)
         db.session.commit()
         session['user_id'] = new_user.id
@@ -32,6 +30,9 @@ class Users(Resource):
         )
         return response
 api.add_resource(Users, '/users')
+
+
+
 
 
 class SignUp(Resource):
@@ -44,44 +45,35 @@ class SignUp(Resource):
         db.session.add(new_user)
         db.session.commit()
 
+        if new_user:
+            if new_user:
+                pass
+
         response = make_response(
             new_user.to_dict(),
             201
         )
         return response
+    
 
-        # username = request.json['username']
-        # email = request.json['email']
-        # password = request.json['password']
+    # data = request.get_json()
+    #     username = data.get('username')
+    #     password = data.get('password')
 
-        # password_confirmation = request.json['password_confirmation']
-        
-        # user_exists = User.query.filter(User.email == email).first() is not None
+    #     user = User.query.filter(User.username == username).first()
 
-        # if user_exists:
-        #     return jsonify({"error": "User already exists"}), 422
-
-        # hashed_password = bcrypt.generate_password_hash(password)
-
-        # hashed_password_confirmation = bcrypt.generate_password_hash(password_confirmation)
-
-        # new_user = User(
-        #     email=email,
-        #     _password_hash=hashed_password,
-
-            # password_confirmation = hashed_password_confirmation,
-        #     username=username
-        # )
-        #added username: new_user.username
-        # db.session.add(new_user)
-        # db.session.commit()
-        # return jsonify({
-        #     "id": new_user.id,
-        #     "email": new_user.email,
-        #     "username": new_user.username
-        # })
+    #     if user:
+    #         if user.authenticate(password):
+    #             session['user_id'] = user.id
+    #             return make_response(user.to_dict(), 200)
+            
+    #     response = make_response({'msg':'Not Authorized'}, 401)
+    #     return response
     
 api.add_resource(SignUp, '/signup', endpoint='signup')
+
+
+
 
 
 class Login(Resource):
@@ -101,34 +93,9 @@ class Login(Resource):
         response = make_response({'msg':'Not Authorized'}, 401)
         return response
     
-        # user = User.query.filter(
-        #     User.username == request.get_json()['username']
-        # ).first()
-
-        # session['user_id'] = user.id
-        # return user.to_dict()
-
-        # username = request.get_json().get('username')
-        # password = request.get_json().get('password')
-        # user = User.query.filter(User.username == username).first()
-
-        # password = request.get_json()['password']
-
-        # if user.authenticate(password):
-        # if user is None:
-        #     return {'error': 'Invalid username or password'}, 401
-        # if not bcrypt.check_password_hash(user._password_hash, password):
-        #     return {'error': 'Invalid username or password'}, 401
-
-        # flash("Login Successful!")
-        # session.permanent = True
-        # session['user_id'] = user.id
-        # return jsonify({
-        #     "id": user.id,
-            # "email": user.email,
-            # "username": user.username
-        # })
 api.add_resource(Login, '/login', endpoint='login')
+
+
 
 
 class Logout(Resource):
@@ -140,6 +107,8 @@ class Logout(Resource):
 api.add_resource(Logout, '/logout', endpoint='logout')
 
 
+
+
 class CheckSession(Resource):
 
     def get(self):      
@@ -148,15 +117,11 @@ class CheckSession(Resource):
             return user.to_dict()
         else:
             return {'message': '401: Not Authorized'}, 401
-
-        # user_id = session['user_id']
-        # if user_id:
-        #     user = User.query.filter(User.id == user_id).first()
-        #     return user.to_dict(), 200
-
-        # return {}, 401
     
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+
+
+
 
 
 class ClearSession(Resource):
@@ -197,16 +162,19 @@ class Workouts( Resource ):
         
     ####I removed this from my plan because it was too much of a hassle...
     ##I'll keep it here for now, just in case I change my mind############
-    def post(self):
-        data = request.get_json()
-        workout = Workout(workout_name = data['workout_name'],
-                          user_id = data['user_id']
-                          )
-        db.session.add(workout)
-        db.session.commit()
-        return make_response(workout.to_dict(), 201)
+    # def post(self):
+    #     data = request.get_json()
+    #     workout = Workout(workout_name = data['workout_name'],
+    #                       user_id = data['user_id']
+    #                       )
+    #     db.session.add(workout)
+    #     db.session.commit()
+    #     return make_response(workout.to_dict(), 201)
     
 api.add_resource(Workouts, '/workouts')
+
+
+
 
 class WorkoutsById( Resource ):
     def get(self, id):
@@ -241,6 +209,8 @@ api.add_resource(WorkoutsById, '/workouts/<int:id>')
 
 class Exercises( Resource ):
     def get(self):
+        # if not session['user_id']:
+        #     return {'error': 'Unauthorized'}, 401
         e_list = []
         for e in Exercise.query.all():
             e_list.append( e.to_dict() )
@@ -254,6 +224,10 @@ class Exercises( Resource ):
         return make_response(e_list, 200)
     
     def post(self):
+        
+        # user = User.query.filter_by( id == session.get('user_id'))
+        # if not user:
+        #     return {'yo': 'not logged in!!'}
         data = request.get_json()
         exercise = Exercise(exercise_name = data['exercise_name'],
                           description = data['description'],
