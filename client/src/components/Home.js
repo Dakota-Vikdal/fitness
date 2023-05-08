@@ -27,8 +27,8 @@ function Home() {
             <li className= 'space10'><a href="https://www.health.harvard.edu/blog/regular-exercise-changes-brain-improve-memory-thinking-skills-201404097110">Regular exercise changes the brain to improve memory, thinking skills</a></li>
             <li className= 'space11'><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9415189/#:~:text=Nootropics%20are%20used%20in%20acute,and%20qualitative%20changes%20in%20consciousness.">Nootropics as Cognitive Enhancers: Types, Dosage and Side Effects of Smart Drugs</a></li>
           </div>
-          <div className='image'>
-            <img src='https://mymodernmet.com/wp/wp-content/uploads/archive/a3gYZvwrs8ZWB8M9DX6B_dailymoves1.gif'/>
+          <div className='img'>
+            <img src=''/>
           </div>
           <div className='goals'>
             <h4>Place a comment section for goal posting here.</h4>

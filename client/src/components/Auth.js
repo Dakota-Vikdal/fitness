@@ -185,6 +185,8 @@ export function Login() {
 export function Logout( { setExercise } ) {
     const {setUser} = useContext(UserContext)
 
+    const history = useHistory()
+
     function onLogout() {
         setUser(null);
     }
@@ -199,7 +201,12 @@ export function Logout( { setExercise } ) {
 
         fetch(`/logout`, {
         method: "DELETE",
-        }).then(() => onLogout())
+        })
+        .then(res => {
+            if(res.ok)
+            onLogout(null)
+            history.push('/')
+        })
     }
     
     return (

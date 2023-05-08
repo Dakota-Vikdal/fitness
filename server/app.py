@@ -6,6 +6,7 @@ from models import User, Workout, ExerciseList, Exercise
 
 api = Api(app)
 
+app.secret_key = b'\xa8\x96G\xf2\xfbM{\x8e\xfdt\x92I\xef\xf3\xd7\x98'
 
 class HomePage(Resource):
     def get(self):
@@ -44,16 +45,16 @@ class SignUp(Resource):
 
         db.session.add(new_user)
         db.session.commit()
+        session['user_id'] = new_user.id
+        return make_response(new_user.to_dict(), 201)
 
-        if new_user:
-            if new_user:
-                pass
-
-        response = make_response(
-            new_user.to_dict(),
-            201
-        )
-        return response
+        # response = make_response(
+        #     new_user.to_dict(),
+        #     201
+        # )
+        # return response
+        # response = make_response({'msg':'Not Authorized'}, 401)
+        # return response
     
 
     # data = request.get_json()
@@ -79,6 +80,19 @@ api.add_resource(SignUp, '/signup', endpoint='signup')
 class Login(Resource):
 
     def post(self):
+        # try:
+        #     user = User.query.filter_by(username=request.get_json['username']).first()
+        #     if user.authenticate(request.get_json['password']):
+        #         session['user_id'] = user.id
+        #         response = make_response(
+        #             user.to_dict(),
+        #             200
+        #         )
+        #         return response
+        # except:
+        #     response = make_response({"msg": "Incorrect username or password"}, 401)
+        #     return response
+        
         data = request.get_json()
         username = data.get('username')
         password = data.get('password')
