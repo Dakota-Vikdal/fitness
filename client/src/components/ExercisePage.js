@@ -9,9 +9,6 @@ function ExcerisePage({onLogout}) {
     const [exercise, setExercise] = useState([])
     //////////////////////////////////////////////
     const [exerciseDropDown, setExerciseDropDown] = useState('')
-
-    console.log(exercise)
-
     
     const myFilter = filteredExercises =>
         filteredExercises.muscles_hit.includes(exerciseDropDown) || exerciseDropDown ==='All'

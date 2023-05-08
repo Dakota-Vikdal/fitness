@@ -81,13 +81,13 @@ if __name__ == '__main__':
 
         #Create an example workout for the user to get ideas from
 
-        w1 = Workout(workout_name = 'Monday Plum Day', user_id = '')
-        w2 = Workout(workout_name = 'Tuesday Groove Day', user_id = '')
-        w3 = Workout(workout_name = 'Wednesday Prince Day', user_id = '')
-        w4 = Workout(workout_name = 'Thursday Curves Day', user_id = '')
-        w5 = Workout(workout_name = 'Friday My Day', user_id = '')
-        w6 = Workout(workout_name = 'Saturday Matters Day', user_id = '')
-        w7 = Workout(workout_name = 'Sunday Fun Day', user_id = '')
+        w1 = Workout(workout_name = 'Monday', user_id = '')
+        w2 = Workout(workout_name = 'Tuesday', user_id = '')
+        w3 = Workout(workout_name = 'Wednesday', user_id = '')
+        w4 = Workout(workout_name = 'Thursday', user_id = '')
+        w5 = Workout(workout_name = 'Friday', user_id = '')
+        w6 = Workout(workout_name = 'Saturday', user_id = '')
+        w7 = Workout(workout_name = 'Sunday', user_id = '')
 
         workouts = [ w1, w2, w3, w4, w5, w6, w7 ]
 

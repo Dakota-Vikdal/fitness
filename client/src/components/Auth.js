@@ -9,6 +9,7 @@ import './Auth.css'
 export function Signup() {
 
     const {setUser} = useContext(UserContext)
+    const [error, setError] = useState(false)
 
     const history = useHistory()
 
@@ -50,13 +51,18 @@ export function Signup() {
                 },
                 body: JSON.stringify(values),
             })
-            .then(res => res.json())
-            .then(user => {
+            .then(res => {
+                if(res.ok){
+                    res.json().then(user => {
                 updateUser(user)
                 history.push('/')
             })
+        } else {
+            res.json().then(error => setError(error.message))
         }
 
+    })
+    },
     })
 
 
@@ -74,6 +80,7 @@ export function Signup() {
                         value={formik.values.username}
                         onChange={formik.handleChange}
                         />
+                    {error&& <p style={{ color: "fuchsia" }}> {error}</p>}
                     </div>
                 </div>
                 <div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import WorkoutList from './WorkoutList'
 
 
-function WorkoutMapped({workout}){
+function WorkoutMapped({ workout, removeExerciseFromState }){
     const [ exerciseList, setExerciseList ] = useState([])
     const [ workoutId, setWorkoutId ] = useState('')
     const [ exerciseId, setExerciseId ] = useState('')
@@ -22,6 +22,7 @@ function WorkoutMapped({workout}){
     <WorkoutList
     key = {workoutObj.id}
     workout= {workoutObj}
+    removeExerciseFromState={removeExerciseFromState}
     /> )
 
     useEffect(() => {

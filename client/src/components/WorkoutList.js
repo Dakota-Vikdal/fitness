@@ -2,10 +2,26 @@ import './WorkoutList.css'
 import {useState} from 'react'
 
 
-function WorkoutList( { workout } ) {
+function WorkoutList( { workout, removeExerciseFromState } ) {
+   
+    // console.log(removeExerciseFromState)
+    // const mappedExercises = workout.exercises.map((exercise, index) => (
+    //     <div key={index}>
+    //     <p>{exercise.id}</p>
+    //     </div>
+    // ))
+
+    // console.log(workout.id)
     
+
+    const handleDelete = () => {
+        fetch(`/workouts/${workout.id}`, {method: 'DELETE'})
+        removeExerciseFromState(workout.id)
+    }
+    
+   
     const [showWorkout, setShowWorkout] = useState(false)
-    
+
 
     const handleClick = () => {
         setShowWorkout(!showWorkout)
@@ -23,6 +39,8 @@ function WorkoutList( { workout } ) {
             <p>{exercise.description}</p>
             <p>{exercise.muscles_hit}</p>
             <p>{exercise.image_url}</p>
+            <p>{exercise.id}</p>
+            <button className = 'button' onClick={handleDelete} >🗑️</button>
             </div>
         ))}
   </div>

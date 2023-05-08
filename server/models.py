@@ -45,11 +45,11 @@ class User( db.Model, SerializerMixin ):
             raise ValueError("Sorry, username already taken.")
         return username
 
-    @validates('_password_hash')
-    def validates_content(self, key, password):
-        if len(password) <= 6:
-            raise ValueError("Password must be 6 characters or longer.")
-        return password
+    # @validates('_password_hash')
+    # def validates_content(self, key, password):
+    #     if len(password) <= 6:
+    #         raise ValueError("Password must be 6 characters or longer.")
+    #     return password
 
 
 
@@ -102,5 +102,6 @@ class ExerciseList(db.Model, SerializerMixin):
 
 
     id = db.Column(db.Integer, primary_key=True)
+    #removed nullable=false from workout_id and exercise_id
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'), nullable=False)

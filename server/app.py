@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from sqlalchemy.exc import IntegrityError
 from config import app, db, bcrypt
 from models import User, Workout, ExerciseList, Exercise
+from flask_abort import abort
 
 api = Api(app)
 
@@ -13,6 +14,20 @@ class HomePage(Resource):
         return {'message': 'Welcome to my Home Page'}, 200
     
 api.add_resource(HomePage, '/')
+
+# @app.before_request
+# def check_if_logged_in():
+#     open_access_list = [
+#         'clear',
+#         'workouts',
+#         'exercises',
+#         'login',
+#         'logout',
+#         'check_session'
+#     ]
+
+#     if (request.endpoint) not in open_access_list and (not session.get('user_id')):
+#         return {'error': '401 Unauthorized'}, 401
 
 
 class Users(Resource):
@@ -39,15 +54,18 @@ api.add_resource(Users, '/users')
 class SignUp(Resource):
     
     def post(self):
-        form_json = request.get_json()
-        new_user = User(username=form_json['username'], email=form_json['email'])
-        new_user.password_hash = form_json['password']
+        try:
+            form_json = request.get_json()
+            new_user = User(username=form_json['username'], email=form_json['email'])
+            new_user.password_hash = form_json['password']
+            if new_user != ['username']:
 
-        db.session.add(new_user)
-        db.session.commit()
-        session['user_id'] = new_user.id
-        return make_response(new_user.to_dict(), 201)
-
+                db.session.add(new_user)
+                db.session.commit()
+                session['user_id'] = new_user.id
+                return make_response(new_user.to_dict(), 201)
+        except:
+            abort(401, "That username is already in use")
         # response = make_response(
         #     new_user.to_dict(),
         #     201
@@ -185,7 +203,7 @@ class Workouts( Resource ):
     #     db.session.commit()
     #     return make_response(workout.to_dict(), 201)
     
-api.add_resource(Workouts, '/workouts')
+api.add_resource(Workouts, '/workouts', endpoint='workouts')
 
 
 
@@ -219,38 +237,41 @@ class WorkoutsById( Resource ):
 api.add_resource(WorkoutsById, '/workouts/<int:id>')
 
 
-
-
 class Exercises( Resource ):
     def get(self):
         # if not session['user_id']:
         #     return {'error': 'Unauthorized'}, 401
-        e_list = []
-        for e in Exercise.query.all():
-            e_list.append( e.to_dict() )
-            # e_dict = {
-            #     'id': e.id,
-            #     'exercise_name': e.exercise_name,
-            #     'description': e.description,
-            #     'muscles_hit': e.muscles_hit
-            # }
-            # e_list.append(e_dict)
-        return make_response(e_list, 200)
+        # else:
+            e_list = []
+            for e in Exercise.query.all():
+                e_list.append( e.to_dict() )
+                # e_dict = {
+                #     'id': e.id,
+                #     'exercise_name': e.exercise_name,
+                #     'description': e.description,
+                #     'muscles_hit': e.muscles_hit
+                # }
+                # e_list.append(e_dict)
+            return make_response(e_list, 200)
     
     def post(self):
-        
-        # user = User.query.filter_by( id == session.get('user_id'))
+        # user = User.query.all().filter_by( id == session.get('user_id'))
         # if not user:
-        #     return {'yo': 'not logged in!!'}
-        data = request.get_json()
-        exercise = Exercise(exercise_name = data['exercise_name'],
-                          description = data['description'],
-                          muscles_hit = data['muscles_hit'])
-        db.session.add(exercise)
-        db.session.commit()
-        return make_response(exercise.to_dict(), 201)
+        #     return {'yo': 'not logged in homie!'}
 
-api.add_resource(Exercises, '/exercises')
+        
+        # if not session['user_id']:
+        #     return {'error': 'Unauthorized'}, 401
+        # else:
+            data = request.get_json()
+            exercise = Exercise(exercise_name = data['exercise_name'],
+                            description = data['description'],
+                            muscles_hit = data['muscles_hit'])
+            db.session.add(exercise)
+            db.session.commit()
+            return make_response(exercise.to_dict(), 201)
+
+api.add_resource(Exercises, '/exercises', endpoint= 'exercises')
 
 class ExercisesById( Resource ):
     def get(self, id):
@@ -329,9 +350,9 @@ class ExerciseListsById( Resource ):
 
 
     def delete( self, id ):
-        el_instance =ExerciseList.query.filter_by( id = id ).first()
+        el_instance = ExerciseList.query.filter_by( id = id ).first()
         if el_instance == None:
-            return make_response({ "error": "VendorSweet not found" }, 404)
+            return make_response({ "error": "exerciselist not found" }, 404)
         db.session.delete( el_instance )
         db.session.commit()
         return make_response({}, 204)

@@ -1,23 +1,15 @@
 import './Exercise.css'
 import { useState } from 'react'
 
-function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState, exerciseLists } ) {
-
-    // const [isOpen, setIsOpen] = useState(false)
-    // const toggleOpen = () => setIsOpen(e => !e)
-    
+function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState, workouts, exerciseLists } ) {
+  
     const [showExerciseLists, setShowExerciseLists] = useState(false);
-    console.log(showExerciseLists)
-
+    // console.log(showExerciseLists)
+    // console.log(workouts)
     const handleButtonClick = (e) => {
         setShowExerciseLists(e => !e);
       }
 
-    // function handleClick() {
-    //     {exerciseLists.map(exercise => {              
-    //         return <li>{exercise.workout.workout_name}</li>
-    //     })}
-    //   }
 
     const [ editExercise, setEditExercise ] = useState(false)
     const toggleEdit = () => setEditExercise( e => !e )
@@ -55,10 +47,16 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
         removeExerciseFromState(id)
     }
 
-    // const exercises = exerciseLists.map(exercise => {              
-    //     return <li key={exercise.workout.id}>{exercise.workout.workout_name}</li>})
-
-    console.log(exerciseLists)
+    //How else can I write this code in to order to get the workout_name
+    // const targetWorkoutName = workouts.map(workout => {              
+        // return <li>{workout.workout_name}</li>
+    // })
+    // console.log(workouts)
+    
+    // console.log(targetWorkoutName)
+    // console.log(exerciseLists)
+    // const filteredExerciseLists = targetWorkoutName.filter(workout => workout);
+    // console.log(filteredExerciseLists)
 
     return(
         <div className='card'>
@@ -85,13 +83,15 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
                 <button className='button2' onClick={handleButtonClick}>Show Workouts</button>
                 {showExerciseLists && (
                     <div>
-                        {exerciseLists.map(exercise => {              
-                            return <li key={exercise.workout.id}>{exercise.workout.workout_name}</li>
-                        })}
-                                                
-                        {/* {exercises.map(exercise => {              
-                        return <li key={exercise.workout.id}>{exercise}</li>
+
+                        {workouts.map(workout => (
+                                <li key={workout.id}>{workout.workout_name}</li>
+                            ))}
+                        {/* {filteredExerciseLists.map(workout => {              
+                            return <li key={workout.id}>{workout.workout_name}</li>
                         })} */}
+
+                       
                     </div>
                 )} 
             </div>
@@ -99,6 +99,13 @@ function Exercise( { id, description, exercise_name, muscles_hit, image_url, upd
         </div>
     )
 }
+
+
+ {/* {filteredExerciseLists.map(exerciseList => {              
+                            return <li key={exerciseList.workout.id}>{exerciseList.workout.workout_name}</li>
+                            })}  */}
+
+
 
 // {exerciseLists.map(exercise => {              
 //     return <li key={exercise.workout.id}>{exercise.workout.workout_name}</li>
