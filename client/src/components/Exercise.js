@@ -1,11 +1,10 @@
 import './Exercise.css'
 import { useState } from 'react'
 
-function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState, workouts, exerciseLists } ) {
+function Exercise( { id, description, exercise_name, muscles_hit, image_url, updateExercise, removeExerciseFromState, workouts } ) {
   
     const [showExerciseLists, setShowExerciseLists] = useState(false);
-    // console.log(showExerciseLists)
-    // console.log(workouts)
+    
     const handleButtonClick = (e) => {
         setShowExerciseLists(e => !e);
       }

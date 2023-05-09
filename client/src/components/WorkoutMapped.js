@@ -2,10 +2,18 @@ import { useEffect, useState } from 'react'
 import WorkoutList from './WorkoutList'
 
 
-function WorkoutMapped({ workout, removeExerciseFromState }){
+function WorkoutMapped({ workout, filteredExercise, exerciseArray }){
     const [ exerciseList, setExerciseList ] = useState([])
     const [ workoutId, setWorkoutId ] = useState('')
     const [ exerciseId, setExerciseId ] = useState('')
+    // console.log(exerciseArray)
+    // console.log(filteredExercise)
+    useEffect(() => {
+        fetch( '/exercise_lists' )
+        .then( res => res.json() )
+        .then( setExerciseList )
+    }, [])
+    
 
     function handleWorkoutId(e) {
         setWorkoutId(e.target.value)
@@ -13,6 +21,7 @@ function WorkoutMapped({ workout, removeExerciseFromState }){
     function handleExerciseId(e) {
         setExerciseId(e.target.value)
     }
+    
 
     const handleNewExercise = newExercise => {
         setExerciseList( [ ...exerciseList, newExercise ] )
@@ -21,15 +30,10 @@ function WorkoutMapped({ workout, removeExerciseFromState }){
     const workouts = workout.map((workoutObj) =>
     <WorkoutList
     key = {workoutObj.id}
-    workout= {workoutObj}
-    removeExerciseFromState={removeExerciseFromState}
+    workout = {workoutObj}
     /> )
 
-    useEffect(() => {
-        fetch( '/exercise_lists' )
-        .then( res => res.json() )
-        .then( setExerciseList )
-    }, [])
+   
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -37,6 +41,7 @@ function WorkoutMapped({ workout, removeExerciseFromState }){
            exercise_id: exerciseId,
            workout_id: workoutId
         }
+
     
     fetch( '/exercise_lists' , {
         method: 'POST',
@@ -44,16 +49,25 @@ function WorkoutMapped({ workout, removeExerciseFromState }){
         body: JSON.stringify(newExerciseList)
     })
         .then(r => r.json())
-        .then(handleNewExercise)
+        .then((data) => {
+            handleNewExercise(data)})
         e.target.reset()
     }
     
-
     return(
         <div>
             <form onSubmit= {handleSubmit}>
-                <input onChange = {handleWorkoutId} type='number' name='workout_id' placeholder='Workout number' />
-                <input onChange = {handleExerciseId} type='number' name='exercise_id' placeholder='Exercise number'/>
+                <select onChange = {handleExerciseId} type='number' name='exercise_id' placeholder='exercises'>
+                    {exerciseArray &&
+                        exerciseArray.map(eObj => {
+                            return <option value={eObj.id}>{eObj.exercise_name}</option>
+                    })}
+                </select>
+                <select onChange = {handleWorkoutId} type='number' name='workout_id' placeholder='workouts'>
+                   {workout.map(wObj => {
+                        return <option value={wObj.id}>{wObj.workout_name}</option>
+                   })} 
+                </select>
                 <button type='submit'>Add Exercise</button>
             </form>
             {workouts}

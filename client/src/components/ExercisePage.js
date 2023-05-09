@@ -58,13 +58,6 @@ function ExcerisePage({onLogout}) {
         setExercise(exerciseArray)
       }
 
-    const [ exerciseLists, setExerciseList ] = useState([])
-      useEffect(() => {
-        fetch( '/exercise_lists' )
-        .then( res => res.json() )
-        .then( setExerciseList )
-    }, [])
-
     
     return(
         <div>
@@ -72,7 +65,6 @@ function ExcerisePage({onLogout}) {
             <NewExercise addExercise = {addExercise}/>
             <DropDown filterExercise = {changeExercise}/>
             <ExerciseMapped 
-                exerciseLists = {exerciseLists}
                 exercises={exerciseList} 
                 updateExercise={updateExercise} 
                 removeExerciseFromState={removeExerciseFromState}

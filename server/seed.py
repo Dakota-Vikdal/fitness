@@ -79,8 +79,7 @@ if __name__ == '__main__':
                     e38, e39, e40, e41, e42, e43, e44, e45, e46,
                     e47, e48, e49, e50 ]
 
-        #Create an example workout for the user to get ideas from
-
+        
         w1 = Workout(workout_name = 'Monday', user_id = '')
         w2 = Workout(workout_name = 'Tuesday', user_id = '')
         w3 = Workout(workout_name = 'Wednesday', user_id = '')

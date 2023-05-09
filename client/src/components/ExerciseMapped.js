@@ -1,6 +1,6 @@
 import Exercise from './Exercise'
 
-function ExerciseMapped({ exercises, updateExercise, removeExerciseFromState, exerciseLists }) {
+function ExerciseMapped({ exercises, updateExercise, removeExerciseFromState }) {
     
     const exercise = exercises.map(exercise => 
         <Exercise 
@@ -8,7 +8,6 @@ function ExerciseMapped({ exercises, updateExercise, removeExerciseFromState, ex
         {...exercise}
         updateExercise={updateExercise}
         removeExerciseFromState = {removeExerciseFromState}
-        exerciseLists={exerciseLists}
         />)
 
     // const exercises = exercise.map(exercise =>

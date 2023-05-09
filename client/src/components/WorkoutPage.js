@@ -5,12 +5,40 @@ function WorkoutPage() {
 
     const [workout, setWorkout] = useState([])
 
-    const removeExerciseFromState = goodbyeExercise => {
-        const filteredArray = workout.filter(goodbyeExerciseObj => {
-          return goodbyeExerciseObj.exercises.id !== goodbyeExercise
-        })
-        setWorkout(filteredArray)
-      }
+    const [exercise, setExercise] = useState([])
+    const [exerciseDropDown, setExerciseDropDown] = useState('')
+
+    const myFilter = filteredExercises =>
+        filteredExercises.exercise_name.includes(exerciseDropDown)
+    
+
+    const exerciseList = exercise.filter(myFilter)
+    console.log(exerciseList)
+    const filteredExercise = newExercise => {
+        setExerciseDropDown(newExercise)
+    }
+    
+
+    useEffect(() => {
+        fetch('http://localhost:5555/exercises')
+            .then(r => {
+                if(r.ok){
+                    r.json().then(exercise => setExercise(exercise))
+                } else {
+                    console.log('uh-oh, something went wrong')
+                }  
+            })
+    },[])
+
+    
+   
+
+    // const removeExerciseFromState = goodbyeExercise => {
+    //     const filteredArray = workout.filter(goodbyeExerciseObj => {
+    //       return goodbyeExerciseObj.exercises.id !== goodbyeExercise
+    //     })
+    //     setWorkout(filteredArray)
+    //   }
    
 
     
@@ -39,25 +67,14 @@ function WorkoutPage() {
     //     body: JSON.stringify(exercise)
     // })
     // .then(res => res.json())
-    // setWorkout(addExercise)
+    // setWorkout(exerciseArray)
     // }
+   
     
-
-
-    // const addExercise = (mO) => {
-    //     const exerciseArray = [...exercise, mO]
-    //     fetch('http://localhost:5555/exercises', {
-    //       method: 'POST',
-    //       headers: {'Content-Type': 'application/json'},
-    //       body: JSON.stringify(mO)
-    //     })
-    //     .then(response => response.json())
-    //     setExercise(exerciseArray)
-    //   }
     
     return(
         <div>
-            <WorkoutMapped workout= {workout} removeExerciseFromState={removeExerciseFromState} />
+            <WorkoutMapped workout= {workout} filteredExercise={filteredExercise} exerciseArray={exerciseList} />
         </div>
     )
 }
