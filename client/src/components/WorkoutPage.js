@@ -13,7 +13,7 @@ function WorkoutPage() {
     
 
     const exerciseList = exercise.filter(myFilter)
-    console.log(exerciseList)
+    
     const filteredExercise = newExercise => {
         setExerciseDropDown(newExercise)
     }
@@ -30,17 +30,28 @@ function WorkoutPage() {
             })
     },[])
 
-    
-   
+    const [ exerciseLists, setExerciseList ] = useState([])
 
-    // const removeExerciseFromState = goodbyeExercise => {
-    //     const filteredArray = workout.filter(goodbyeExerciseObj => {
-    //       return goodbyeExerciseObj.exercises.id !== goodbyeExercise
-    //     })
-    //     setWorkout(filteredArray)
-    //   }
-   
+    const handleNewExercise = newExercise => {
+        setExerciseList( [ ...exerciseList, newExercise ] )
+      }
 
+    useEffect(() => {
+        fetch( '/exercise_lists' )
+        .then( res => res.json() )
+        .then( setExerciseList )
+    }, [])
+    console.log(exerciseLists)
+
+    /////////////////////////////////////////////////////////////////////
+    const removeExerciseFromState = goodbyeExercise => {
+        const filteredArray = exerciseLists.filter(goodbyeExerciseObj => {
+          return goodbyeExerciseObj.exercise_id !== goodbyeExercise
+        })
+        setWorkout(filteredArray)
+      }
+    /////////////////////////////////////////////////////////////////////
+   
     
     useEffect(() => {
         fetch(`http://localhost:5555/workouts`)
@@ -54,27 +65,20 @@ function WorkoutPage() {
                 }
             })       
     },[])
-
-
-
-    
-
-    // const addExercise = (exercise) => {
-    //     const exerciseArray = [...workout, exercise]
-    //     fetch('http://localhost:5555/workouts', {
-    //     method: 'POST',
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: JSON.stringify(exercise)
-    // })
-    // .then(res => res.json())
-    // setWorkout(exerciseArray)
-    // }
    
     
     
     return(
         <div>
-            <WorkoutMapped workout= {workout} filteredExercise={filteredExercise} exerciseArray={exerciseList} />
+            <WorkoutMapped 
+                workout= {workout} 
+                filteredExercise={filteredExercise} 
+                exerciseList={exerciseList}
+                handleNewExercise={handleNewExercise}
+                exerciseLists={exerciseLists}
+                removeExerciseFromState={removeExerciseFromState}
+                />
+               
         </div>
     )
 }

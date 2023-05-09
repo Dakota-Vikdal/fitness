@@ -2,17 +2,12 @@ import { useEffect, useState } from 'react'
 import WorkoutList from './WorkoutList'
 
 
-function WorkoutMapped({ workout, filteredExercise, exerciseArray }){
-    const [ exerciseList, setExerciseList ] = useState([])
+function WorkoutMapped({ workout, filteredExercise, exerciseList, handleNewExercise,  exerciseLists, removeExerciseFromState }){
+    
+
+    
     const [ workoutId, setWorkoutId ] = useState('')
     const [ exerciseId, setExerciseId ] = useState('')
-    // console.log(exerciseArray)
-    // console.log(filteredExercise)
-    useEffect(() => {
-        fetch( '/exercise_lists' )
-        .then( res => res.json() )
-        .then( setExerciseList )
-    }, [])
     
 
     function handleWorkoutId(e) {
@@ -23,9 +18,7 @@ function WorkoutMapped({ workout, filteredExercise, exerciseArray }){
     }
     
 
-    const handleNewExercise = newExercise => {
-        setExerciseList( [ ...exerciseList, newExercise ] )
-      }
+   
 
     const workouts = workout.map((workoutObj) =>
     <WorkoutList
@@ -53,13 +46,14 @@ function WorkoutMapped({ workout, filteredExercise, exerciseArray }){
             handleNewExercise(data)})
         e.target.reset()
     }
+
     
     return(
         <div>
             <form onSubmit= {handleSubmit}>
                 <select onChange = {handleExerciseId} type='number' name='exercise_id' placeholder='exercises'>
-                    {exerciseArray &&
-                        exerciseArray.map(eObj => {
+                    {exerciseList &&
+                        exerciseList.map(eObj => {
                             return <option value={eObj.id}>{eObj.exercise_name}</option>
                     })}
                 </select>
