@@ -16,24 +16,25 @@ class HomePage(Resource):
     
 api.add_resource(HomePage, '/')
 
-# @app.before_request
-# def check_if_logged_in():
+#
+# 
 #     logged_in = session.get( 'user_id' )
 #     signing_up = 'users' in request.path and 'POST' in request.method
 #     logging_in = 'login' in request.path and 'POST' in request.method
 
 #     if not logged_in and not signing_up and not logging_in:
 #         return make_response( {'message': 'please log in' }, 401)
+@app.before_request
+def check_if_logged_in():
+    open_access_list = [
+        'login',
+        'check_session',
+        'signup'
+    ]
 
-    # open_access_list = [
-    #     'login',
-    #     'check_session',
-    #     'signup'
-    # ]
-
-    # if (request.endpoint) not in open_access_list and (not session.get('user_id')):
-    #     response = make_response( {'error': '401 Unauthorized'}, 401)
-    #     return response
+    if (request.endpoint) not in open_access_list and (not session.get('user_id')):
+        response = make_response( {'error': '401 Unauthorized'}, 401)
+        return response
 
 
 class Users(Resource):

@@ -13,7 +13,7 @@ function ExcerisePage({onLogout}) {
     const myFilter = filteredExercises =>
         filteredExercises.muscles_hit.includes(exerciseDropDown) || exerciseDropDown ==='All'
 
-    const exerciseList = exercise.filter(myFilter)
+    // const exerciseList = exercise.filter(myFilter)
 
     const changeExercise = newExercise => {
         setExerciseDropDown(newExercise)
@@ -41,7 +41,7 @@ function ExcerisePage({onLogout}) {
 
 
     useEffect(() => {
-        fetch('http://localhost:5555/exercises')
+        fetch('/exercises')
             .then(r => r.json())
             .then(setExercise)
     },[])
@@ -65,7 +65,7 @@ function ExcerisePage({onLogout}) {
             <NewExercise addExercise = {addExercise}/>
             <DropDown filterExercise = {changeExercise}/>
             <ExerciseMapped 
-                exercises={exerciseList} 
+                exercises={exercise} 
                 updateExercise={updateExercise} 
                 removeExerciseFromState={removeExerciseFromState}
              />
