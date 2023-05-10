@@ -30,8 +30,11 @@ function Home() {
           <div className='img'>
             <img src=''/>
           </div>
-          <div className='goals'>
-            <h4>Place a comment section for goal posting here.</h4>
+          <div className='gif'>
+            <img src='https://i.pinimg.com/originals/c1/b9/ab/c1b9ab7396615778f2a0903d420cd10f.gif'/>
+          </div>
+          <div className='fitness'>
+            <img src= 'https://media.istockphoto.com/id/679304972/photo/man-lifting-dumbbells.jpg?s=612x612&w=0&k=20&c=xph2mPInFl8wUAV32yMUnC6birEp43E-bjX-RW48vTc='/>
           </div>
         </div>)
         } else {

@@ -1,0 +1,13 @@
+
+
+
+function CommentMade({comment}) {
+    
+    return(
+        <div>
+
+        </div>
+    )
+}
+
+export default CommentMade

@@ -60,7 +60,6 @@ export function Signup() {
         } else {
             res.json().then(error => setError(error.message))
         }
-
     })
     },
     })
@@ -68,8 +67,8 @@ export function Signup() {
 
     return (
         <div className='signup'>
-            <form onSubmit={formik.handleSubmit}  >
-                <h2>Signup!</h2>
+            <form onSubmit={formik.handleSubmit} >
+                <h2>Haven't created an account? Signup here.</h2>
                 <div className='inner-signup'>
                     <div>
                         <label htmlFor="username">Username </label>
@@ -112,7 +111,6 @@ export function Signup() {
             </form>
         </div>
     )
-
 }
 
 export function Login() {

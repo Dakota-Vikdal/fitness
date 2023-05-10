@@ -51,7 +51,7 @@ function WorkoutPage() {
         setWorkout(filteredArray)
       }
     /////////////////////////////////////////////////////////////////////
-   console.log(exerciseLists[0])
+//    console.log(exerciseLists)
     
     useEffect(() => {
         fetch(`http://localhost:5555/workouts`)

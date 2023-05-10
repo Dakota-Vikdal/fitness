@@ -8,11 +8,12 @@ import WorkoutPage from './components/WorkoutPage'
 import { UserContext } from "./context/User";
 import React, { useContext } from "react";
 import Header from './components/Header'
+import LoginSignup from './components/LoginSignup'
 
 
 function App() {
   // const [user, setUser] = useState(null);
-  const { setUser } = useContext(UserContext)
+  const { user,setUser } = useContext(UserContext)
   
   useEffect(() => {
       fetch("/check_session").then((response) => {
@@ -24,6 +25,7 @@ function App() {
       });
   }, [setUser]);
 
+  if (!user) return <LoginSignup /> 
   
   return (
      <div className="App">

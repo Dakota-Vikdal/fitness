@@ -19,11 +19,12 @@ function WorkoutMapped({ workout, filteredExercise, exerciseList, handleNewExerc
     
 
    
-
+//? after workout
     const workouts = workout.map((workoutObj) =>
     <WorkoutList
-    key = {workoutObj.id}
-    workout = {workoutObj}
+        key = {workoutObj.id}
+        workout = {workoutObj}
+        exerciseLists={exerciseLists}
     /> )
 
    

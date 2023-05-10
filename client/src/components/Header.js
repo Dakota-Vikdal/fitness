@@ -21,8 +21,8 @@ function Header() {
         <Link to='/' className="navbar-link">Home</Link>
         <Link to='/exercisepage' className="navbar-link">Exercises/logout</Link>
         <Link to='/workoutpage' className="navbar-link">Workouts</Link>
-        <Link to='/login' className="navbar-link">Login</Link>
-        <Link to='/signup' className="navbar-link">Signup</Link>
+        {/* <Link to='/login' className="navbar-link">Login</Link>
+        <Link to='/signup' className="navbar-link">Signup</Link> */}
       </div>
       <div className='image'>
         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqgTXtvJgi5d20cpzEvyi0lN3RdEBYnzUvklhFcZEQfu8fsIlgHyHvFdU8xkS024JBilg&usqp=CAU'></img>

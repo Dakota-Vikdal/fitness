@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from config import app, db, bcrypt
 from models import User, Workout, ExerciseList, Exercise
 from flask_abort import abort
+# import ipdb
 
 api = Api(app)
 
@@ -17,17 +18,22 @@ api.add_resource(HomePage, '/')
 
 # @app.before_request
 # def check_if_logged_in():
-#     open_access_list = [
-#         'clear',
-#         'workouts',
-#         'exercises',
-#         'login',
-#         'logout',
-#         'check_session'
-#     ]
+#     logged_in = session.get( 'user_id' )
+#     signing_up = 'users' in request.path and 'POST' in request.method
+#     logging_in = 'login' in request.path and 'POST' in request.method
 
-#     if (request.endpoint) not in open_access_list and (not session.get('user_id')):
-#         return {'error': '401 Unauthorized'}, 401
+#     if not logged_in and not signing_up and not logging_in:
+#         return make_response( {'message': 'please log in' }, 401)
+
+    # open_access_list = [
+    #     'login',
+    #     'check_session',
+    #     'signup'
+    # ]
+
+    # if (request.endpoint) not in open_access_list and (not session.get('user_id')):
+    #     response = make_response( {'error': '401 Unauthorized'}, 401)
+    #     return response
 
 
 class Users(Resource):
@@ -143,12 +149,29 @@ api.add_resource(Logout, '/logout', endpoint='logout')
 
 class CheckSession(Resource):
 
-    def get(self):      
-        user = User.query.filter(User.id == session.get('user_id')).first()
-        if user:
-            return user.to_dict()
-        else:
-            return {'message': '401: Not Authorized'}, 401
+    def get(self): 
+
+        if session.get('user_id'):
+
+            user = User.query.filter_by(id=session['user_id']).first()
+
+            user_dict = user.to_dict()
+
+            response = make_response(user_dict, 200)
+
+            return response
+
+        response = make_response({'error': '401 Unauthorized'}, 401)
+
+        return response
+
+# api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+
+        # user = User.query.filter(User.id == session.get('user_id')).first()
+        # if user:
+        #     return user.to_dict()
+        # else:
+        #     return {'message': '401: Not Authorized'}, 401
     
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 
@@ -256,20 +279,20 @@ class Exercises( Resource ):
     
     def post(self):
         # user = User.query.all().filter_by( id == session.get('user_id'))
-        # if not user:
+        # if not user and session.get('user_id'):
         #     return {'yo': 'not logged in homie!'}
 
         
         # if not session['user_id']:
         #     return {'error': 'Unauthorized'}, 401
         # else:
-            data = request.get_json()
-            exercise = Exercise(exercise_name = data['exercise_name'],
-                            description = data['description'],
-                            muscles_hit = data['muscles_hit'])
-            db.session.add(exercise)
-            db.session.commit()
-            return make_response(exercise.to_dict(), 201)
+        data = request.get_json()
+        exercise = Exercise(exercise_name = data['exercise_name'],
+                        description = data['description'],
+                        muscles_hit = data['muscles_hit'])
+        db.session.add(exercise)
+        db.session.commit()
+        return make_response(exercise.to_dict(), 201)
 
 api.add_resource(Exercises, '/exercises', endpoint= 'exercises')
 
@@ -348,14 +371,27 @@ class ExerciseListsById( Resource ):
         return make_response(el_instance.to_dict(), 200)
     
 
-
+ 
     def delete( self, id ):
-        el_instance = ExerciseList.query.filter_by( id = id ).first()
-        if el_instance == None:
-            return make_response({ "error": "exerciselist not found" }, 404)
-        db.session.delete( el_instance )
-        db.session.commit()
-        return make_response({}, 204)
+        data = request.get_json()
+        # return make_response( { 'msg': data } , 200)
+        # find the workout
+        w_instance = Workout.query.filter_by( id = id ).first()
+        
+        # look at the exerciselists for that workout
+        
+        # find the instance of exerciselist with the same exercise_id as the one we're sending
+        # delete that insstance of exerciselist
+
+
+
+        # ipdb.set_trace()
+        # el_instance = ExerciseList.query.filter_by( id = id ).first()
+        # if el_instance == None:
+        #     return make_response({ "error": "exerciselist not found" }, 404)
+        # db.session.delete( el_instance )
+        # db.session.commit()
+        # return make_response({}, 204)
     
 api.add_resource(ExerciseListsById, '/exercise_lists/<int:id>')
 
