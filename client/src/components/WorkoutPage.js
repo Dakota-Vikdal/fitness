@@ -41,7 +41,7 @@ function WorkoutPage() {
         .then( res => res.json() )
         .then( setExerciseList )
     }, [])
-    console.log(exerciseLists)
+    
 
     /////////////////////////////////////////////////////////////////////
     const removeExerciseFromState = goodbyeExercise => {
@@ -51,7 +51,7 @@ function WorkoutPage() {
         setWorkout(filteredArray)
       }
     /////////////////////////////////////////////////////////////////////
-   
+   console.log(exerciseLists[0])
     
     useEffect(() => {
         fetch(`http://localhost:5555/workouts`)

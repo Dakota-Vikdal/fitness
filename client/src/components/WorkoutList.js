@@ -6,10 +6,11 @@ function WorkoutList( { workout, removeExerciseFromState, exerciseLists } ) {
     
 
 
-    const handleDelete = () => {
-        fetch(`http://127.0.0.1:5555/exercise_lists/${exercise_id}`, {method: 'DELETE'})
-        removeExerciseFromState(exercise_id)
-    }
+    // const handleDelete = () => {
+    //     fetch(`http://127.0.0.1:5555/exercise_lists/${exerciseLists.id}`, {method: 'DELETE'})
+    //     removeExerciseFromState(exerciseLists.id)
+    // }
+   
     
    
     // console.log(removeExerciseFromState)
@@ -48,7 +49,7 @@ function WorkoutList( { workout, removeExerciseFromState, exerciseLists } ) {
             <p>{exercise.muscles_hit}</p>
             <p>{exercise.image_url}</p>
             <p>{exercise.id}</p>
-            <button className = 'button' onClick={handleDelete} >🗑️</button>
+            {/* <button className = 'button' onClick={handleDelete} >🗑️</button> */}
             </div>
         ))}
   </div>

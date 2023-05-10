@@ -87,7 +87,6 @@ class Exercise(db.Model, SerializerMixin):
     exercise_name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     muscles_hit = db.Column(db.String, nullable=False)
-    image_url = db.Column(db.String)
 
     exerciselists = db.relationship('ExerciseList', backref='exercise')
     workouts = association_proxy('exerciselists', 'workout')
@@ -102,6 +101,9 @@ class ExerciseList(db.Model, SerializerMixin):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    #removed nullable=false from workout_id and exercise_id
+
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'), nullable=False)
+
+
+

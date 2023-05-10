@@ -1,8 +1,8 @@
 """models
 
-Revision ID: 604c61e5eded
+Revision ID: 24f420dd3454
 Revises: 
-Create Date: 2023-05-09 15:18:56.467744
+Create Date: 2023-05-09 21:13:55.773723
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '604c61e5eded'
+revision = '24f420dd3454'
 down_revision = None
 branch_labels = None
 depends_on = None
