@@ -61,18 +61,20 @@ api.add_resource(Users, '/users')
 class SignUp(Resource):
     
     def post(self):
+        form_json = request.get_json()
         try:
-            form_json = request.get_json()
             new_user = User(username=form_json['username'], email=form_json['email'])
-            new_user.password_hash = form_json['password']
-            if new_user != ['username']:
-
-                db.session.add(new_user)
-                db.session.commit()
-                session['user_id'] = new_user.id
-                return make_response(new_user.to_dict(), 201)
+           
         except:
+            
             abort(401, "That username is already in use")
+        new_user.password_hash = form_json['password']
+
+        
+        db.session.add(new_user)
+        db.session.commit()
+        session['user_id'] = new_user.id
+        return make_response(new_user.to_dict(), 201)
         # response = make_response(
         #     new_user.to_dict(),
         #     201

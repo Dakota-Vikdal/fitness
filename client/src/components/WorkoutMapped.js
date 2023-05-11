@@ -33,7 +33,7 @@ function WorkoutMapped({ workout, addExerciseToWorkout, filteredExercise, exerci
         .then(r => r.json())
         .then( (exerciselist) => {
             addExerciseToWorkout(exerciselist)
-            console.log(exerciselist.workout_id)
+            // console.log(exerciselist.workout_id)
             /*
             we need to add exerciselist.workout to the array of exercises associated with this workout
             */

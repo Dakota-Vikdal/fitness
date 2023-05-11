@@ -6,19 +6,19 @@ function WorkoutList( { workout, removeExerciseFromState, exerciseLists } ) {
     
 
     
-    const handleDelete = (exercise_id) => {
+    // const handleDelete = (exercise_id) => {
        
-        fetch(`/exercise_lists/1`, {
-            method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                workout_id: workout.id,
-                exercise_id 
-            })
-        })  .then(r => r.json())
-            .then(data => console.log(data))
-        // removeExerciseFromState(id)
-    }
+    //     fetch(`/exercise_lists/1`, {
+    //         method: 'DELETE',
+    //         headers: {'Content-Type': 'application/json'},
+    //         body: JSON.stringify({
+    //             workout_id: workout.id,
+    //             exercise_id 
+    //         })
+    //     })  .then(r => r.json())
+    //         .then(data => console.log(data))
+    //     // removeExerciseFromState(id)
+    // }
    
     
    
@@ -55,7 +55,7 @@ function WorkoutList( { workout, removeExerciseFromState, exerciseLists } ) {
             <p>{exercise.muscles_hit}</p>
             <p>{exercise.image_url}</p>
             <p>{exercise.id}</p>
-            <button className = 'button' onClick={() => handleDelete(exercise.id)} >🗑️</button>
+            {/* <button className = 'button' onClick={() => handleDelete(exercise.id)} >🗑️</button> */}
             </div>
         ))}
   </div>

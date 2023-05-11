@@ -4,7 +4,7 @@ import WorkoutMapped from './WorkoutMapped'
 function WorkoutPage() {
     //workout is really an array of workouts
     const [workout, setWorkout] = useState([])
-    console.log(workout)
+    // console.log(workout)
 
 
 
