@@ -13,7 +13,7 @@ function ExcerisePage({onLogout}) {
     const myFilter = filteredExercises =>
         filteredExercises.muscles_hit.includes(exerciseDropDown) || exerciseDropDown ==='All'
 
-    // const exerciseList = exercise.filter(myFilter)
+    const exerciseList = exercise.filter(myFilter)
 
     const changeExercise = newExercise => {
         setExerciseDropDown(newExercise)
@@ -47,12 +47,12 @@ function ExcerisePage({onLogout}) {
     },[])
 
 
-    const addExercise = (mO) => {
-        const exerciseArray = [...exercise, mO]
-        fetch('http://localhost:5555/exercises', {
+    const addExercise = (exerciseObj) => {
+        const exerciseArray = [...exercise, exerciseObj]
+        fetch('/exercises', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(mO)
+          body: JSON.stringify(exerciseObj)
         })
         .then(response => response.json())
         setExercise(exerciseArray)
@@ -65,7 +65,7 @@ function ExcerisePage({onLogout}) {
             <NewExercise addExercise = {addExercise}/>
             <DropDown filterExercise = {changeExercise}/>
             <ExerciseMapped 
-                exercises={exercise} 
+                exercises={exerciseList} 
                 updateExercise={updateExercise} 
                 removeExerciseFromState={removeExerciseFromState}
              />

@@ -24,17 +24,17 @@ api.add_resource(HomePage, '/')
 
 #     if not logged_in and not signing_up and not logging_in:
 #         return make_response( {'message': 'please log in' }, 401)
-@app.before_request
-def check_if_logged_in():
-    open_access_list = [
-        'login',
-        'check_session',
-        'signup'
-    ]
+# @app.before_request
+# def check_if_logged_in():
+#     open_access_list = [
+#         'login',
+#         'check_session',
+#         'signup'
+#     ]
 
-    if (request.endpoint) not in open_access_list and (not session.get('user_id')):
-        response = make_response( {'error': '401 Unauthorized'}, 401)
-        return response
+#     if (request.endpoint) not in open_access_list and (not session.get('user_id')):
+#         response = make_response( {'error': '401 Unauthorized'}, 401)
+#         return response
 
 
 class Users(Resource):
@@ -202,6 +202,7 @@ api.add_resource(ClearSession, '/clear', endpoint='clear')
 class Workouts( Resource ):
     def get(self):
         w_list = [w.to_dict() for w in Workout.query.all()]
+        
 
         if w_list == None:
             return make_response({'msg': 'error bois'}, 404)

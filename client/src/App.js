@@ -15,6 +15,7 @@ function App() {
   // const [user, setUser] = useState(null);
   const { user,setUser } = useContext(UserContext)
   
+  
   useEffect(() => {
       fetch("/check_session").then((response) => {
           if (response.ok) {

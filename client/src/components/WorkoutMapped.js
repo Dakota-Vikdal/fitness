@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import WorkoutList from './WorkoutList'
 
 
-function WorkoutMapped({ workout, filteredExercise, exerciseList, handleNewExercise,  exerciseLists, removeExerciseFromState }){
+function WorkoutMapped({ workout, addExerciseToWorkout, filteredExercise, exerciseList, handleNewExercise, removeExerciseFromState }){
     
-
     
     const [ workoutId, setWorkoutId ] = useState('')
     const [ exerciseId, setExerciseId ] = useState('')
@@ -17,17 +16,6 @@ function WorkoutMapped({ workout, filteredExercise, exerciseList, handleNewExerc
         setExerciseId(e.target.value)
     }
     
-
-   
-//? after workout
-    const workouts = workout.map((workoutObj) =>
-    <WorkoutList
-        key = {workoutObj.id}
-        workout = {workoutObj}
-        exerciseLists={exerciseLists}
-    /> )
-
-   
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -43,10 +31,25 @@ function WorkoutMapped({ workout, filteredExercise, exerciseList, handleNewExerc
         body: JSON.stringify(newExerciseList)
     })
         .then(r => r.json())
-        .then((data) => {
-            handleNewExercise(data)})
+        .then( (exerciselist) => {
+            addExerciseToWorkout(exerciselist)
+            console.log(exerciselist.workout_id)
+            /*
+            we need to add exerciselist.workout to the array of exercises associated with this workout
+            */
+          
+        } )
         e.target.reset()
     }
+   
+//? after workout
+    const workouts = workout?.map((workoutObj) =>
+    <WorkoutList
+        key = {workoutObj.id}
+        workout = {workoutObj}
+        // exerciseLists={exerciseLists}
+    /> )
+
 
     
     return(

@@ -5,7 +5,7 @@ import {useState} from 'react'
 function WorkoutList( { workout, removeExerciseFromState, exerciseLists } ) {
     
 
-    console.log(exerciseLists)
+    
     const handleDelete = (exercise_id) => {
        
         fetch(`/exercise_lists/1`, {
@@ -35,7 +35,8 @@ function WorkoutList( { workout, removeExerciseFromState, exerciseLists } ) {
     
     
     const [showWorkout, setShowWorkout] = useState(false)
-
+    //Whenever I change to a different page or refresh the current page the exercise renders in the workout
+    //I need to make it render immediately upon posting it to a workout
 
     const handleClick = () => {
         setShowWorkout(!showWorkout)

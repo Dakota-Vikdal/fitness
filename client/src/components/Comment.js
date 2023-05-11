@@ -21,7 +21,7 @@ function Comment() {
 
     const addComment = (commentObj) => {
         const commentArray = [...comment, commentObj]
-        fetch('http://localhost:5555/comments', {
+        fetch('/comments', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(commentObj)
